@@ -22,3 +22,28 @@ var/
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
+*.egg-info
+.installed.cfg
+
+# React & Next.js
+node_modules/
+.next/
+out/
+.vercel
+npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.*.local
+
+# React build
+build/
+dist/
+*.tsbuildinfo
+.DS_Store
+.cache/
+
+# Editor
+*.swp
+*.swo
