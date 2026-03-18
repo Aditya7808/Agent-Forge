@@ -197,20 +197,20 @@ Progress: ████████████████████░░░�
 
 ### ✅ Completed Agents
 
-|  #  | Agent                                                                    | Description                                                                                     | Tech Stack                            | Difficulty |                     Demo                     |
-| :-: | :----------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- | :------------------------------------ | :--------: | :------------------------------------------: |
-| 01  | [🛎️ **Customer Support Agent**](./01_customer_support_agent_langgraph)   | Multi-agent system with intelligent query routing, sentiment analysis, and escalation workflows | LangGraph, OpenAI, Streamlit          |    ⭐⭐    | [▶️](./01_customer_support_agent_langgraph)  |
-| 02  | [🔍 **Web Search & Summarizer**](./02_search_the_internet_and_summarize) | Internet research agent with intelligent summarization and source citation                      | LangChain, DuckDuckGo, OpenAI         |     ⭐     | [▶️](./02_search_the_internet_and_summarize) |
-| 03  | [🤖 **Chatbot Simulation**](./03_chatbot-simulation-evaluation)          | Multi-bot conversation simulator with evaluation metrics and Plotly visualizations              | LangChain, LangGraph, Plotly          |    ⭐⭐    |   [▶️](./03_chatbot-simulation-evaluation)   |
-| 04  | [📝 **AI Prompt Generator**](./04%20information-gather-prompting)        | Structured data extraction using advanced prompt engineering techniques                         | LangChain, LangGraph, Streamlit       |    ⭐⭐    |  [▶️](./04%20information-gather-prompting)   |
-| 05  | [👗 **Vibe Matcher**](./05%20Vibe%20Matcher)                             | AI fashion recommender using embeddings & semantic similarity search                            | OpenAI Embeddings, Scikit-learn       |    ⭐⭐    |         [▶️](./05%20Vibe%20Matcher)          |
-| 06  | [🎯 **Lead Generation Agent**](./06%20lead_gen_agent)                    | B2B lead finder with scoring, enrichment & Google Maps integration                              | LangChain, LangGraph, Apify           |   ⭐⭐⭐   |         [▶️](./06%20lead_gen_agent)          |
-| 07  | [📱 **Instagram DM Bot**](./07%20AI-Powered-Instagram-DM-Bot)            | AI-powered auto-reply bot for Instagram DMs with human-like responses                           | OpenAI GPT-4o-mini, Instagram API     |    ⭐⭐    |   [▶️](./07%20AI-Powered-Instagram-DM-Bot)   |
-| 08  | [🌐 **AutoGen Web Info Agent**](./08_AutoGen_Web_Info_Agent)             | Multi-agent system for web research, stocks & academic paper analysis                           | AutoGen, OpenAI, Streamlit            |   ⭐⭐⭐   |      [▶️](./08_AutoGen_Web_Info_Agent)       |
-| 09  | [🖥️ **AI Co-Browser**](./AI-Co-Browser-main)                             | Full-stack AI portfolio assistant with co-browsing, page navigation & element highlighting      | React, Express, OpenAI, PostgreSQL    |  ⭐⭐⭐⭐  |          [▶️](./AI-Co-Browser-main)          |
-| 10  | [🦾 **OpenClaw**](./OpenClaw-From-Scratch-main)                          | Production-grade Slack AI bot with RAG, Long-Term Memory & 59 MCP tools                         | Claude, Slack Bolt.js, ChromaDB, mem0 | ⭐⭐⭐⭐⭐ |      [▶️](./OpenClaw-From-Scratch-main)      |
-| 11  | [🎮 **AI Tic Tac Toe**](./11%20AI_tic_tac_toe_agent)                     | AI vs AI game with GPT-4o & Claude battling with strategic personalities & real-time gameplay   | Agno, OpenAI, Anthropic, Streamlit    |    ⭐⭐    |      [▶️](./11%20AI_tic_tac_toe_agent)       |
-| 12  | [👨‍⚖️ **AI Legal Agent Team**](./Legal%20Agent)                           | Multi-agent legal team — contract review, risk assessment, compliance check & due diligence powered by GPT-4o | Agno, OpenAI GPT-4o, DuckDuckGo, Streamlit | ⭐⭐⭐ | [▶️](./Legal%20Agent) |
+|  #  | Agent                                                                    | Description                                                                                                   | Tech Stack                                 | Difficulty |                     Demo                     |
+| :-: | :----------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :----------------------------------------- | :--------: | :------------------------------------------: |
+| 01  | [🛎️ **Customer Support Agent**](./01_customer_support_agent_langgraph)   | Multi-agent system with intelligent query routing, sentiment analysis, and escalation workflows               | LangGraph, OpenAI, Streamlit               |    ⭐⭐    | [▶️](./01_customer_support_agent_langgraph)  |
+| 02  | [🔍 **Web Search & Summarizer**](./02_search_the_internet_and_summarize) | Internet research agent with intelligent summarization and source citation                                    | LangChain, DuckDuckGo, OpenAI              |     ⭐     | [▶️](./02_search_the_internet_and_summarize) |
+| 03  | [🤖 **Chatbot Simulation**](./03_chatbot-simulation-evaluation)          | Multi-bot conversation simulator with evaluation metrics and Plotly visualizations                            | LangChain, LangGraph, Plotly               |    ⭐⭐    |   [▶️](./03_chatbot-simulation-evaluation)   |
+| 04  | [📝 **AI Prompt Generator**](./04%20information-gather-prompting)        | Structured data extraction using advanced prompt engineering techniques                                       | LangChain, LangGraph, Streamlit            |    ⭐⭐    |  [▶️](./04%20information-gather-prompting)   |
+| 05  | [👗 **Vibe Matcher**](./05%20Vibe%20Matcher)                             | AI fashion recommender using embeddings & semantic similarity search                                          | OpenAI Embeddings, Scikit-learn            |    ⭐⭐    |         [▶️](./05%20Vibe%20Matcher)          |
+| 06  | [🎯 **Lead Generation Agent**](./06%20lead_gen_agent)                    | B2B lead finder with scoring, enrichment & Google Maps integration                                            | LangChain, LangGraph, Apify                |   ⭐⭐⭐   |         [▶️](./06%20lead_gen_agent)          |
+| 07  | [📱 **Instagram DM Bot**](./07%20AI-Powered-Instagram-DM-Bot)            | AI-powered auto-reply bot for Instagram DMs with human-like responses                                         | OpenAI GPT-4o-mini, Instagram API          |    ⭐⭐    |   [▶️](./07%20AI-Powered-Instagram-DM-Bot)   |
+| 08  | [🌐 **AutoGen Web Info Agent**](./08_AutoGen_Web_Info_Agent)             | Multi-agent system for web research, stocks & academic paper analysis                                         | AutoGen, OpenAI, Streamlit                 |   ⭐⭐⭐   |      [▶️](./08_AutoGen_Web_Info_Agent)       |
+| 09  | [🖥️ **AI Co-Browser**](./12%20AI-Co-Browser-main)                        | Full-stack AI portfolio assistant with co-browsing, page navigation & element highlighting                    | React, Express, OpenAI, PostgreSQL         |  ⭐⭐⭐⭐  |       [▶️](./12%20AI-Co-Browser-main)        |
+| 10  | [🦾 **OpenClaw**](./14%20OpenClaw-From-Scratch-main)                     | Production-grade Slack AI bot with RAG, Long-Term Memory & 59 MCP tools                                       | Claude, Slack Bolt.js, ChromaDB, mem0      | ⭐⭐⭐⭐⭐ |   [▶️](./14%20OpenClaw-From-Scratch-main)    |
+| 11  | [🎮 **AI Tic Tac Toe**](./11%20AI_tic_tac_toe_agent)                     | AI vs AI game with GPT-4o & Claude battling with strategic personalities & real-time gameplay                 | Agno, OpenAI, Anthropic, Streamlit         |    ⭐⭐    |      [▶️](./11%20AI_tic_tac_toe_agent)       |
+| 12  | [👨‍⚖️ **AI Legal Agent Team**](./13%20Legal%20Agent)                       | Multi-agent legal team — contract review, risk assessment, compliance check & due diligence powered by GPT-4o | Agno, OpenAI GPT-4o, DuckDuckGo, Streamlit |   ⭐⭐⭐   |          [▶️](./13%20Legal%20Agent)          |
 
 ### 📈 Difficulty Legend
 
@@ -227,19 +227,19 @@ Progress: ████████████████████░░░�
 
 ### 🚧 Coming Soon (Days 13+)
 
-|   #   | Agent                     | Description                                       | Tech Stack                        | Status |
-| :---: | :------------------------ | :------------------------------------------------ | :-------------------------------- | :----: |
-|  13   | 📧 **Email Assistant**    | Smart email drafting, categorization & auto-reply | LangChain, Gmail API              |   ⏳   |
-|  14   | 📅 **Calendar Manager**   | AI scheduling assistant with conflict resolution  | Google Calendar, Natural Language |   ⏳   |
-|  15   | 📊 **Data Analyst Agent** | Automated data analysis with visualization        | Pandas, Plotly, OpenAI            |   ⏳   |
-|  16   | 🔐 **Security Scanner**   | Code vulnerability detection agent                | CodeQL, OpenAI                    |   ⏳   |
-|  17   | 📝 **Meeting Summarizer** | Automatic meeting transcription & action items    | Whisper, LangChain                |   ⏳   |
-|  18   | 🎨 **Content Creator**    | Blog posts, social media content generation       | OpenAI, Stability AI              |   ⏳   |
-|  19   | 💰 **Finance Tracker**    | Expense categorization & budget planning          | Plaid API, OpenAI                 |   ⏳   |
-|  20   | 🏥 **Health Assistant**   | Symptom checker & wellness recommendations        | Medical APIs, Safety filters      |   ⏳   |
-|  21   | 📚 **Study Buddy**        | Flashcard generation & quiz creation              | LangChain, Anki format            |   ⏳   |
-|  22   | 🛒 **Shopping Agent**     | Price comparison & recommendation engine          | Web scraping, RAG                 |   ⏳   |
-| 23+   | 🔜 **More Agents...**     | The challenge never stops — new agents every day! | Multiple                          |   ⏳   |
+|  #  | Agent                     | Description                                       | Tech Stack                        | Status |
+| :-: | :------------------------ | :------------------------------------------------ | :-------------------------------- | :----: |
+| 13  | 📧 **Email Assistant**    | Smart email drafting, categorization & auto-reply | LangChain, Gmail API              |   ⏳   |
+| 14  | 📅 **Calendar Manager**   | AI scheduling assistant with conflict resolution  | Google Calendar, Natural Language |   ⏳   |
+| 15  | 📊 **Data Analyst Agent** | Automated data analysis with visualization        | Pandas, Plotly, OpenAI            |   ⏳   |
+| 16  | 🔐 **Security Scanner**   | Code vulnerability detection agent                | CodeQL, OpenAI                    |   ⏳   |
+| 17  | 📝 **Meeting Summarizer** | Automatic meeting transcription & action items    | Whisper, LangChain                |   ⏳   |
+| 18  | 🎨 **Content Creator**    | Blog posts, social media content generation       | OpenAI, Stability AI              |   ⏳   |
+| 19  | 💰 **Finance Tracker**    | Expense categorization & budget planning          | Plaid API, OpenAI                 |   ⏳   |
+| 20  | 🏥 **Health Assistant**   | Symptom checker & wellness recommendations        | Medical APIs, Safety filters      |   ⏳   |
+| 21  | 📚 **Study Buddy**        | Flashcard generation & quiz creation              | LangChain, Anki format            |   ⏳   |
+| 22  | 🛒 **Shopping Agent**     | Price comparison & recommendation engine          | Web scraping, RAG                 |   ⏳   |
+| 23+ | 🔜 **More Agents...**     | The challenge never stops — new agents every day! | Multiple                          |   ⏳   |
 
 ### 🗓️ Future Planned Categories
 
@@ -395,7 +395,7 @@ streamlit run app.py
 <summary><strong>⚛️ React/TypeScript Agents (AI-Co-Browser)</strong></summary>
 
 ```bash
-cd AI-Co-Browser-main
+cd "12 AI-Co-Browser-main"
 npm install
 cp .env.example .env
 # Add your OPENAI_API_KEY and DATABASE_URL to .env
@@ -410,7 +410,7 @@ npm run dev
 <summary><strong>🦾 Slack Bots (OpenClaw)</strong></summary>
 
 ```bash
-cd OpenClaw-From-Scratch-main/OpenClaw-From-Scratch-main
+cd "14 OpenClaw-From-Scratch-main/OpenClaw-From-Scratch-main"
 npm install
 cp .env.example .env
 # Configure Slack tokens, API keys in .env
@@ -537,13 +537,13 @@ Each agent folder contains:
 ├── 📁 08_AutoGen_Web_Info_Agent/
 │   └── ...
 │
-├── 📁 AI-Co-Browser-main/              # 🆕 Day 09
+├── 📁 12 AI-Co-Browser-main/           # 🆕 Day 09
 │   ├── client/                   # React frontend
 │   ├── server/                   # Express backend
 │   ├── shared/                   # Shared types
 │   └── api/                      # API routes
 │
-├── 📁 OpenClaw-From-Scratch-main/      # 🆕 Day 10
+├── 📁 14 OpenClaw-From-Scratch-main/   # 🆕 Day 10
 │   └── OpenClaw-From-Scratch-main/
 │       ├── src/
 │       │   ├── agents/           # AI agent logic
@@ -557,7 +557,7 @@ Each agent folder contains:
 ├── 📁 11 AI_tic_tac_toe_agent/         # 🆕 Day 11
 │   └── ...
 │
-├── 📁 Legal Agent/                     # 🆕 Day 12
+├── 📁 13 Legal Agent/                  # 🆕 Day 12
 │   ├── legal_agent_team.py       # Streamlit app + multi-agent team
 │   ├── requirements.txt          # Dependencies
 │   ├── .env                      # API keys
