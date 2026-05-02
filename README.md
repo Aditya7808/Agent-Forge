@@ -174,20 +174,20 @@
 
 <div align="center">
 
-### 🏆 Current Status: **12 Agents Complete — And Counting!**
+### 🏆 Current Status: **14 Agents Forged — And Counting!**
 
 ```
-Progress: ████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 12+ (No limit!)
+Progress: ███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 14+ (No finish line)
 ```
 
 | Metric                     | Value   |
 | -------------------------- | ------- |
-| 🤖 **Agents Built**        | 12      |
-| 📝 **Lines of Code**       | 18,000+ |
-| 🌟 **Tech Stacks**         | 10      |
-| 📚 **Frameworks**          | 8       |
-| 🔗 **Integrations**        | 14      |
-| 📖 **Documentation Pages** | 29+     |
+| 🤖 **Agents Built**        | 14      |
+| 📝 **Lines of Code**       | 22,000+ |
+| 🌟 **Tech Stacks**         | 12      |
+| 📚 **Frameworks**          | 10      |
+| 🔗 **Integrations**        | 16      |
+| 📖 **Documentation Pages** | 35+     |
 
 </div>
 
@@ -211,6 +211,8 @@ Progress: ████████████████████░░░�
 | 10  | [🦾 **OpenClaw**](./14%20OpenClaw-From-Scratch-main)                     | Production-grade Slack AI bot with RAG, Long-Term Memory & 59 MCP tools                                       | Claude, Slack Bolt.js, ChromaDB, mem0      | ⭐⭐⭐⭐⭐ |   [▶️](./14%20OpenClaw-From-Scratch-main)    |
 | 11  | [🎮 **AI Tic Tac Toe**](./11%20AI_tic_tac_toe_agent)                     | AI vs AI game with GPT-4o & Claude battling with strategic personalities & real-time gameplay                 | Agno, OpenAI, Anthropic, Streamlit         |    ⭐⭐    |      [▶️](./11%20AI_tic_tac_toe_agent)       |
 | 12  | [👨‍⚖️ **AI Legal Agent Team**](./13%20Legal%20Agent)                       | Multi-agent legal team — contract review, risk assessment, compliance check & due diligence powered by GPT-4o | Agno, OpenAI GPT-4o, DuckDuckGo, Streamlit |   ⭐⭐⭐   |          [▶️](./13%20Legal%20Agent)          |
+| 13  | [📚 **AI Tutor — Smart Quiz Generator**](./15%20ai-tutor)                | Converts PDF/Word study materials into chapter-wise AI quizzes with auto-grading and feedback                 | Python, NLP, Vector Embeddings, Node.js    |   ⭐⭐⭐   |             [▶️](./15%20ai-tutor)            |
+| 14  | [🎨 **UI/UX Feedback Agent Team**](./16_UI_UX%20Feedback%20Agent_Nano_banana) | 5-specialist multi-agent design crew — critic, strategist, implementer, A11y auditor, CRO optimizer + Streamlit UI | Google ADK, Gemini 2.5 Flash, Nano Banana, Streamlit | ⭐⭐⭐⭐ | [▶️](./16_UI_UX%20Feedback%20Agent_Nano_banana) |
 
 ### 📈 Difficulty Legend
 
@@ -223,23 +225,22 @@ Progress: ████████████████████░░░�
 ---
 
 <details>
-<summary><strong>📂 View All 100 Agents Roadmap (Click to Expand)</strong></summary>
+<summary><strong>📂 View Future Agents Roadmap (Click to Expand)</strong></summary>
 
-### 🚧 Coming Soon (Days 13+)
+### 🚧 Coming Soon (Agents 15+)
 
 |  #  | Agent                     | Description                                       | Tech Stack                        | Status |
 | :-: | :------------------------ | :------------------------------------------------ | :-------------------------------- | :----: |
-| 13  | 📧 **Email Assistant**    | Smart email drafting, categorization & auto-reply | LangChain, Gmail API              |   ⏳   |
-| 14  | 📅 **Calendar Manager**   | AI scheduling assistant with conflict resolution  | Google Calendar, Natural Language |   ⏳   |
-| 15  | 📊 **Data Analyst Agent** | Automated data analysis with visualization        | Pandas, Plotly, OpenAI            |   ⏳   |
-| 16  | 🔐 **Security Scanner**   | Code vulnerability detection agent                | CodeQL, OpenAI                    |   ⏳   |
-| 17  | 📝 **Meeting Summarizer** | Automatic meeting transcription & action items    | Whisper, LangChain                |   ⏳   |
-| 18  | 🎨 **Content Creator**    | Blog posts, social media content generation       | OpenAI, Stability AI              |   ⏳   |
-| 19  | 💰 **Finance Tracker**    | Expense categorization & budget planning          | Plaid API, OpenAI                 |   ⏳   |
-| 20  | 🏥 **Health Assistant**   | Symptom checker & wellness recommendations        | Medical APIs, Safety filters      |   ⏳   |
-| 21  | 📚 **Study Buddy**        | Flashcard generation & quiz creation              | LangChain, Anki format            |   ⏳   |
-| 22  | 🛒 **Shopping Agent**     | Price comparison & recommendation engine          | Web scraping, RAG                 |   ⏳   |
-| 23+ | 🔜 **More Agents...**     | The challenge never stops — new agents every day! | Multiple                          |   ⏳   |
+| 15  | 📧 **Email Assistant**    | Smart email drafting, categorization & auto-reply | LangChain, Gmail API              |   ⏳   |
+| 16  | 📅 **Calendar Manager**   | AI scheduling assistant with conflict resolution  | Google Calendar, Natural Language |   ⏳   |
+| 17  | 📊 **Data Analyst Agent** | Automated data analysis with visualization        | Pandas, Plotly, OpenAI            |   ⏳   |
+| 18  | 🔐 **Security Scanner**   | Code vulnerability detection agent                | CodeQL, OpenAI                    |   ⏳   |
+| 19  | 📝 **Meeting Summarizer** | Automatic meeting transcription & action items    | Whisper, LangChain                |   ⏳   |
+| 20  | 🎨 **Content Creator**    | Blog posts, social media content generation       | OpenAI, Stability AI              |   ⏳   |
+| 21  | 💰 **Finance Tracker**    | Expense categorization & budget planning          | Plaid API, OpenAI                 |   ⏳   |
+| 22  | 🏥 **Health Assistant**   | Symptom checker & wellness recommendations        | Medical APIs, Safety filters      |   ⏳   |
+| 23  | 🛒 **Shopping Agent**     | Price comparison & recommendation engine          | Web scraping, RAG                 |   ⏳   |
+| 24+ | 🔜 **More Agents...**     | The forge never stops — new agents whenever ready | Multiple                          |   ⏳   |
 
 ### 🗓️ Future Planned Categories
 
@@ -267,7 +268,7 @@ Progress: ████████████████████░░░�
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        100 DAYS 100 AI AGENTS                               │
+│                              AGENT FORGE                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐             │
@@ -537,13 +538,13 @@ agent-forge/
 ├── 📁 08_AutoGen_Web_Info_Agent/
 │   └── ...
 │
-├── 📁 12 AI-Co-Browser-main/           # 🆕 Day 09
+├── 📁 12 AI-Co-Browser-main/           # AI co-browsing assistant
 │   ├── client/                   # React frontend
 │   ├── server/                   # Express backend
 │   ├── shared/                   # Shared types
 │   └── api/                      # API routes
 │
-├── 📁 14 OpenClaw-From-Scratch-main/   # 🆕 Day 10
+├── 📁 14 OpenClaw-From-Scratch-main/   # Slack RAG bot with MCP + memory
 │   └── OpenClaw-From-Scratch-main/
 │       ├── src/
 │       │   ├── agents/           # AI agent logic
@@ -554,13 +555,25 @@ agent-forge/
 │       │   └── tools/            # Agent tools
 │       └── docs/                 # Architecture docs
 │
-├── 📁 11 AI_tic_tac_toe_agent/         # 🆕 Day 11
+├── 📁 11 AI_tic_tac_toe_agent/         # GPT-4o vs Claude game
 │   └── ...
 │
-├── 📁 13 Legal Agent/                  # 🆕 Day 12
+├── 📁 13 Legal Agent/                  # Multi-agent legal team
 │   ├── legal_agent_team.py       # Streamlit app + multi-agent team
 │   ├── requirements.txt          # Dependencies
 │   ├── .env                      # API keys
+│   └── README.md                 # Documentation
+│
+├── 📁 15 ai-tutor/                     # 🆕 PDF → AI quiz generator
+│   ├── backend/                  # Python NLP + embeddings pipeline
+│   ├── frontend/                 # Web UI
+│   └── assets/                   # Screenshots
+│
+├── 📁 16_UI_UX Feedback Agent_Nano_banana/ # 🆕 Multi-agent design crew
+│   ├── agent.py                  # Coordinator + 5 specialist agents
+│   ├── prompts.py                # Centralized agent personas
+│   ├── tools.py                  # generate / edit / compare / WCAG
+│   ├── app.py                    # Streamlit UI
 │   └── README.md                 # Documentation
 │
 ├── 📁 .github/
@@ -583,10 +596,13 @@ agent-forge/
 ### Q1 2026 - Foundation ✅
 
 - [x] Launch project with 8 core agents
-- [x] Add AI-Co-Browser (Day 09)
-- [x] Add OpenClaw with RAG + Memory + MCP (Day 10)
-- [x] Add AI Tic Tac Toe multi-agent game (Day 11)
-- [x] Add AI Legal Agent Team — multi-agent legal analysis (Day 12)
+- [x] Add AI Co-Browser (full-stack React + Express)
+- [x] Add OpenClaw with RAG + Memory + MCP
+- [x] Add AI Tic Tac Toe multi-agent game
+- [x] Add AI Legal Agent Team — multi-agent legal analysis
+- [x] Add AI Tutor — PDF → quiz generator
+- [x] Add UI/UX Feedback Agent Team — 5-specialist design crew
+- [x] Rebrand to **Agent Forge** — open-ended, no-deadline collection
 - [x] Comprehensive documentation
 - [x] Contributor guidelines
 
@@ -597,6 +613,7 @@ agent-forge/
 - [ ] Create video tutorials
 - [ ] Launch Discord community
 - [ ] Add automated testing
+- [ ] Standardize agent template (folder layout + boilerplate)
 
 ### Q3 2026 - Scale
 
@@ -608,7 +625,7 @@ agent-forge/
 
 ### Beyond - No Finish Line 🚀
 
-- [ ] Keep building — one agent at a time, indefinitely!
+- [ ] Keep forging — one agent at a time, indefinitely!
 - [ ] Publish book/course
 - [ ] Conference presentations
 - [ ] Case studies
@@ -700,7 +717,7 @@ Yes! This project is licensed under Apache 2.0. You can use, modify, and distrib
 <details>
 <summary><strong>Q: Which agent should I start with?</strong></summary>
 
-If you're new to AI agents, start with Day 02 (Web Search & Summarizer). It's simple but demonstrates core concepts. For advanced users, try Day 10 (OpenClaw) for production patterns.
+If you're new to AI agents, start with **#2 Web Search & Summarizer** — it's simple but demonstrates the core ReAct loop. For multi-agent patterns, try **#14 UI/UX Feedback Agent Team** (coordinator + 5 specialists). For production-grade patterns with RAG + memory + MCP, try **#10 OpenClaw**.
 
 </details>
 
@@ -772,7 +789,7 @@ Special thanks to:
 
 <br/>
 
-**🚀 Building the future of AI, one agent at a time — no finish line. 🚀**
+**🔨 Forging the future of AI, one agent at a time — no finish line. 🔨**
 
 <br/>
 
