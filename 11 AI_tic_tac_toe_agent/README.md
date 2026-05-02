@@ -172,7 +172,7 @@ MAX_RETRIES = 2          # Retry attempts before fallback
 
 ## 📝 License
 
-This project is part of the 100-Days-100-AI-AGENTS challenge.
+This project is part of the **Agent Forge** collection.
 
 ## 🤝 Contributing
 

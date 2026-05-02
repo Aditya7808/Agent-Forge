@@ -57,20 +57,20 @@ Notes and limits
 Contact
 
 This prototype was generated as part of a mini-project. For changes, edit files under `src/` and re-run the notebook.
-# 🤖 100 Days - 100 AI Agents Challenge
+# 🔨 Agent Forge
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-)
+[![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red.svg)](https://github.com/ayusingh-54/agent-forge)
 
-> A comprehensive collection of AI-powered agents built with cutting-edge technologies like LangChain, LangGraph, OpenAI, and more. One agent every 2 days for 100 days!
+> A comprehensive collection of AI-powered agents built with cutting-edge technologies like LangChain, LangGraph, OpenAI, and more.
 
 ---
 
 ## 🌟 Project Vision
 
-Welcome to the **100 Days - 100 AI Agents Challenge**! This is an open-source initiative to create a diverse collection of production-ready AI agents that solve real-world problems. Each agent is:
+Welcome to **Agent Forge**! This is an open-source initiative to create a diverse collection of production-ready AI agents that solve real-world problems. Each agent is:
 
 - ✅ **Fully Functional**: Ready to use out of the box
 - ✅ **Well Documented**: Clear explanations and examples
@@ -278,8 +278,8 @@ streamlit run app.py
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-.git
-cd 100-Days-100-AI-AGENTS-
+git clone https://github.com/ayusingh-54/agent-forge.git
+cd agent-forge
 ```
 
 2. **Create a virtual environment** (recommended)
@@ -373,7 +373,7 @@ We **love** contributions! This project thrives on community involvement.
 
 #### 1. **Report Issues**
 
-Found a bug? Have a suggestion? [Open an issue](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues)
+Found a bug? Have a suggestion? [Open an issue](https://github.com/ayusingh-54/agent-forge/issues)
 
 #### 2. **Submit Pull Requests**
 
@@ -529,8 +529,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ### Get Help
 
-- 📖 [Read the Documentation](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-)
-- 💬 [Open an Issue](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues)
+- 📖 [Read the Documentation](https://github.com/ayusingh-54/agent-forge)
+- 💬 [Open an Issue](https://github.com/ayusingh-54/agent-forge/issues)
 - 📧 Contact: [Your Email]
 - 🐦 Twitter: [@YourHandle]
 
@@ -677,8 +677,8 @@ By the end of 100 days, this repository will contain:
 
 We'd love to hear from you!
 
-- **Found a bug?** [Open an issue](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues)
-- **Have a suggestion?** [Start a discussion](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/discussions)
+- **Found a bug?** [Open an issue](https://github.com/ayusingh-54/agent-forge/issues)
+- **Have a suggestion?** [Start a discussion](https://github.com/ayusingh-54/agent-forge/discussions)
 - **Want to collaborate?** [Contact me](mailto:your.email@example.com)
 - **Need help?** Check the docs or ask in issues
 
@@ -688,12 +688,12 @@ We'd love to hear from you!
 
 | Resource         | Link                                                                           |
 | ---------------- | ------------------------------------------------------------------------------ |
-| 🏠 Home          | [Repository](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-)           |
-| 📖 Documentation | [Docs](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/tree/main)       |
-| 🐛 Issues        | [Report Issues](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues) |
+| 🏠 Home          | [Repository](https://github.com/ayusingh-54/agent-forge)           |
+| 📖 Documentation | [Docs](https://github.com/ayusingh-54/agent-forge/tree/main)       |
+| 🐛 Issues        | [Report Issues](https://github.com/ayusingh-54/agent-forge/issues) |
 | 🤝 Contributing  | [Contribution Guide](#contributing)                                            |
 | 📜 License       | [MIT License](LICENSE)                                                         |
-| ⭐ Star History  | [Star History](https://star-history.com/#ayusingh-54/100-Days-100-AI-AGENTS-)  |
+| ⭐ Star History  | [Star History](https://star-history.com/#ayusingh-54/agent-forge)  |
 
 ---
 

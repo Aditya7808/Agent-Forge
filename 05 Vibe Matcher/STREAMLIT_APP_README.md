@@ -465,7 +465,7 @@ Contributions welcome! Please:
 
 ## 📄 License
 
-This project is part of the 100 Days - 100 AI Agents Challenge.
+This project is part of the **Agent Forge** collection.
 
 ---
 

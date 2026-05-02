@@ -1,4 +1,4 @@
-# 🤝 Contributing to 100 Days 100 AI Agents
+# 🤝 Contributing to Agent Forge
 
 First off, **thank you** for considering contributing to this project! 🎉
 
@@ -254,11 +254,11 @@ Apache 2.0
 # 1. Fork the repository on GitHub
 
 # 2. Clone your fork
-git clone https://github.com/YOUR-USERNAME/100-Days-100-AI-AGENTS-.git
-cd 100-Days-100-AI-AGENTS-
+git clone https://github.com/YOUR-USERNAME/agent-forge.git
+cd agent-forge
 
 # 3. Add upstream remote
-git remote add upstream https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-.git
+git remote add upstream https://github.com/ayusingh-54/agent-forge.git
 
 # 4. Keep your fork synced
 git fetch upstream
@@ -554,8 +554,8 @@ Contributors are recognized in several ways:
 Need help? Have questions?
 
 - 📧 **Email**: [ayusingh693@gmail.com](mailto:ayusingh693@gmail.com)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/ayusingh-54/agent-forge/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ayusingh-54/agent-forge/discussions)
 
 ---
 

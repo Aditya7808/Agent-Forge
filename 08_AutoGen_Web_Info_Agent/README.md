@@ -410,7 +410,7 @@ Log level controlled by `LOG_LEVEL` environment variable:
 
 ## 📄 License
 
-This project is part of the 100 Days 100 AI Agents initiative.
+This project is part of the **Agent Forge** initiative.
 
 ## 🙏 Acknowledgments
 

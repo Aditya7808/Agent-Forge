@@ -1,6 +1,6 @@
 # Support This Project 💖
 
-Thank you for considering supporting **100 Days 100 AI Agents**! Your support helps maintain and improve this open-source project.
+Thank you for considering supporting **Agent Forge**! Your support helps maintain and improve this open-source project.
 
 ## 🙏 Why Support?
 

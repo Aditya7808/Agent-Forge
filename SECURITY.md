@@ -12,7 +12,7 @@
 
 ## 📊 Supported Versions
 
-The following versions of 100 Days 100 AI Agents are currently being supported with security updates:
+The following versions of Agent Forge are currently being supported with security updates:
 
 | Version     | Supported | Notes                    |
 | ----------- | --------- | ------------------------ |

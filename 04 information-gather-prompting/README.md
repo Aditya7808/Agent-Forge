@@ -52,8 +52,8 @@ export OPENAI_API_KEY="your-api-key-here"
 1. **Clone the repository** (if you haven't):
 
 ```bash
-git clone https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-.git
-cd 100-Days-100-AI-AGENTS-/information-gather-prompting
+git clone https://github.com/ayusingh-54/agent-forge.git
+cd agent-forge/04\ information-gather-prompting
 ```
 
 2. **Install dependencies**:
@@ -513,7 +513,7 @@ Contributions are welcome! Please:
 
 ## 📄 License
 
-This project is part of the "100 Days - 100 AI Agents" initiative.
+This project is part of the **Agent Forge** initiative.
 
 ## 🙏 Acknowledgments
 
@@ -524,12 +524,12 @@ This project is part of the "100 Days - 100 AI Agents" initiative.
 
 ## 📞 Support
 
-- **GitHub Issues**: [Report bugs](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues)
+- **GitHub Issues**: [Report bugs](https://github.com/ayusingh-54/agent-forge/issues)
 - **Documentation**: See this README and inline code comments
 - **Examples**: Check `backend.py` main section for usage examples
 
 ---
 
-**Made with ❤️ as part of 100 Days - 100 AI Agents Challenge**
+**Made with ❤️ as part of the Agent Forge collection**
 
 🌟 **Star this repo if you find it helpful!**

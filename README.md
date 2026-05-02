@@ -1,10 +1,10 @@
 <div align="center">
 
-![Daily AI Agents Challenge](https://img.shields.io/badge/🤖_Daily_AI-Agents_Challenge-blueviolet?style=for-the-badge&labelColor=1a1a2e)
+![Agent Forge](https://img.shields.io/badge/🔨_Agent-Forge-blueviolet?style=for-the-badge&labelColor=1a1a2e)
 
-# 🚀 Daily AI Agents Challenge
+# 🔨 Agent Forge
 
-### _Building Production-Ready AI Agents, One Day at a Time — No Finish Line_
+### _Forging Production-Ready AI Agents, One Build at a Time — No Finish Line_
 
 <p align="center">
   <strong>🎯 The Ultimate Open-Source AI Agent Collection</strong><br/>
@@ -13,12 +13,12 @@
 
 ---
 
-[![GitHub Stars](https://img.shields.io/github/stars/ayusingh-54/100-Days-100-AI-AGENTS-?style=for-the-badge&logo=github&logoColor=white&color=gold)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/ayusingh-54/100-Days-100-AI-AGENTS-?style=for-the-badge&logo=github&logoColor=white&color=blue)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/ayusingh-54/100-Days-100-AI-AGENTS-?style=for-the-badge&logo=github&logoColor=white&color=orange)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/ayusingh-54/agent-forge?style=for-the-badge&logo=github&logoColor=white&color=gold)](https://github.com/ayusingh-54/agent-forge/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/ayusingh-54/agent-forge?style=for-the-badge&logo=github&logoColor=white&color=blue)](https://github.com/ayusingh-54/agent-forge/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/ayusingh-54/agent-forge?style=for-the-badge&logo=github&logoColor=white&color=orange)](https://github.com/ayusingh-54/agent-forge/issues)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
-[![Contributors](https://img.shields.io/github/contributors/ayusingh-54/100-Days-100-AI-AGENTS-?style=for-the-badge&logo=github&color=purple)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/graphs/contributors)
-[![Last Commit](https://img.shields.io/github/last-commit/ayusingh-54/100-Days-100-AI-AGENTS-?style=for-the-badge&logo=git&color=red)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/commits/main)
+[![Contributors](https://img.shields.io/github/contributors/ayusingh-54/agent-forge?style=for-the-badge&logo=github&color=purple)](https://github.com/ayusingh-54/agent-forge/graphs/contributors)
+[![Last Commit](https://img.shields.io/github/last-commit/ayusingh-54/agent-forge?style=for-the-badge&logo=git&color=red)](https://github.com/ayusingh-54/agent-forge/commits/main)
 
 ---
 
@@ -74,7 +74,7 @@
 
 > **"The journey of mastering AI agents begins with a single commit."**
 
-**100 Days - 100 AI Agents** is a comprehensive open-source challenge to build **production-ready AI agents** covering diverse use cases. This isn't just a tutorial collection—it's a hands-on journey through the cutting edge of AI agent development.
+**Agent Forge** is a comprehensive open-source collection of **production-ready AI agents** covering diverse use cases. This isn't just a tutorial collection—it's a hands-on journey through the cutting edge of AI agent development.
 
 ### 🌟 What Makes This Different?
 
@@ -353,8 +353,8 @@ Ensure you have the following installed:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-.git
-cd 100-Days-100-AI-AGENTS-
+git clone https://github.com/ayusingh-54/agent-forge.git
+cd agent-forge
 
 # 2. Choose an agent (example: Customer Support Agent)
 cd 01_customer_support_agent_langgraph
@@ -504,7 +504,7 @@ Each agent folder contains:
 ## 📂 Project Structure
 
 ```
-100-Days-100-AI-AGENTS/
+agent-forge/
 │
 ├── 📁 01_customer_support_agent_langgraph/
 │   ├── app.py                    # Streamlit frontend
@@ -640,7 +640,7 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 
 ```bash
 # Fork the repository
-git clone https://github.com/YOUR-USERNAME/100-Days-100-AI-AGENTS-.git
+git clone https://github.com/YOUR-USERNAME/agent-forge.git
 
 # Create a branch
 git checkout -b feature/amazing-feature
@@ -667,7 +667,7 @@ Join our growing community of AI enthusiasts!
 
 ### Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=ayusingh-54/100-Days-100-AI-AGENTS-&type=Date)](https://star-history.com/#ayusingh-54/100-Days-100-AI-AGENTS-&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=ayusingh-54/agent-forge&type=Date)](https://star-history.com/#ayusingh-54/agent-forge&Date)
 
 ---
 
@@ -780,6 +780,6 @@ Made with ❤️ by [Ayush Singh](https://github.com/ayusingh-54)
 
 <br/>
 
-[![GitHub Stars](https://img.shields.io/github/stars/ayusingh-54/100-Days-100-AI-AGENTS-?style=for-the-badge&logo=github&color=gold)](https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/ayusingh-54/agent-forge?style=for-the-badge&logo=github&color=gold)](https://github.com/ayusingh-54/agent-forge/stargazers)
 
 </div>

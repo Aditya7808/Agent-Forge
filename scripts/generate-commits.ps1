@@ -1,4 +1,4 @@
-# 100 Days 100 AI Agents - Automated Commit Generator
+# Agent Forge - Automated Commit Generator
 # This script generates meaningful commits for the project history
 
 param(
@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "   100 Days 100 AI Agents - Commit Generator                " -ForegroundColor Cyan
+Write-Host "   Agent Forge - Commit Generator                           " -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
 

@@ -256,8 +256,8 @@ aa/
    ```
 
 4. **Share the link**:
-   - GitHub repo: `https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-`
-   - Direct notebook: `https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/blob/main/aa/notebooks/vibe_matcher.ipynb`
+   - GitHub repo: `https://github.com/ayusingh-54/agent-forge`
+   - Direct notebook: `https://github.com/ayusingh-54/agent-forge/blob/main/aa/notebooks/vibe_matcher.ipynb`
 
 ### For Demo
 

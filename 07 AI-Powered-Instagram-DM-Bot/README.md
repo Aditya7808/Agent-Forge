@@ -81,8 +81,8 @@ The bot responds naturally, like a real human texting on Instagram!
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-.git
-cd "100-Days-100-AI-AGENTS-/07 AI-Powered-Instagram-DM-Bot"
+git clone https://github.com/ayusingh-54/agent-forge.git
+cd "agent-forge/07 AI-Powered-Instagram-DM-Bot"
 ```
 
 ### Step 2: Install Dependencies

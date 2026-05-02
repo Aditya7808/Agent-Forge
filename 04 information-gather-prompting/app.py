@@ -40,8 +40,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
-        'Get Help': 'https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-',
-        'Report a bug': 'https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues',
+        'Get Help': 'https://github.com/ayusingh-54/agent-forge',
+        'Report a bug': 'https://github.com/ayusingh-54/agent-forge/issues',
         'About': '# AI Prompt Generator\nPowered by LangChain & LangGraph'
     }
 )
@@ -412,7 +412,7 @@ def render_sidebar():
             <div style='text-align: center; color: #666; font-size: 0.8rem;'>
                 <p>Powered by</p>
                 <p><strong>LangChain + LangGraph</strong></p>
-                <p>🌟 Part of 100 Days - 100 AI Agents</p>
+                <p>🌟 Part of Agent Forge</p>
             </div>
         """, unsafe_allow_html=True)
 

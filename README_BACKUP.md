@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/🤖_100_Days-100_AI_Agents-blueviolet?style=for-the-badge" alt="100 Days 100 AI Agents"/>
+  <img src="https://img.shields.io/badge/🔨_Agent-Forge-blueviolet?style=for-the-badge" alt="Agent Forge"/>
 </p>
 
-<h1 align="center">100 Days - 100 AI Agents Challenge</h1>
+<h1 align="center">Agent Forge</h1>
 
 <p align="center">
-  <strong>Building One AI Agent Every Day for 100 Days</strong>
+  <strong>Forging Production-Ready AI Agents — One Build at a Time</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/stargazers"><img src="https://img.shields.io/github/stars/ayusingh-54/100-Days-100-AI-AGENTS-?style=social" alt="Stars"></a>
-  <a href="https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/network/members"><img src="https://img.shields.io/github/forks/ayusingh-54/100-Days-100-AI-AGENTS-?style=social" alt="Forks"></a>
-  <a href="https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-/issues"><img src="https://img.shields.io/github/issues/ayusingh-54/100-Days-100-AI-AGENTS-" alt="Issues"></a>
+  <a href="https://github.com/ayusingh-54/agent-forge/stargazers"><img src="https://img.shields.io/github/stars/ayusingh-54/agent-forge?style=social" alt="Stars"></a>
+  <a href="https://github.com/ayusingh-54/agent-forge/network/members"><img src="https://img.shields.io/github/forks/ayusingh-54/agent-forge?style=social" alt="Forks"></a>
+  <a href="https://github.com/ayusingh-54/agent-forge/issues"><img src="https://img.shields.io/github/issues/ayusingh-54/agent-forge" alt="Issues"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg" alt="License"></a>
 </p>
 
@@ -84,8 +84,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/ayusingh-54/100-Days-100-AI-AGENTS-.git
-cd 100-Days-100-AI-AGENTS-
+git clone https://github.com/ayusingh-54/agent-forge.git
+cd agent-forge
 
 # Create virtual environment
 python -m venv venv
