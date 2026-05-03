@@ -174,20 +174,20 @@
 
 <div align="center">
 
-### 🏆 Current Status: **14 Agents Forged — And Counting!**
+### 🏆 Current Status: **15 Agents Forged — And Counting!**
 
 ```
-Progress: ███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 14+ (No finish line)
+Progress: █████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 15+ (No finish line)
 ```
 
 | Metric                     | Value   |
 | -------------------------- | ------- |
-| 🤖 **Agents Built**        | 14      |
-| 📝 **Lines of Code**       | 22,000+ |
-| 🌟 **Tech Stacks**         | 12      |
+| 🤖 **Agents Built**        | 15      |
+| 📝 **Lines of Code**       | 25,000+ |
+| 🌟 **Tech Stacks**         | 13      |
 | 📚 **Frameworks**          | 10      |
-| 🔗 **Integrations**        | 16      |
-| 📖 **Documentation Pages** | 35+     |
+| 🔗 **Integrations**        | 17      |
+| 📖 **Documentation Pages** | 38+     |
 
 </div>
 
@@ -213,6 +213,7 @@ Progress: ███████████████████████�
 | 12  | [👨‍⚖️ **AI Legal Agent Team**](./13%20Legal%20Agent)                       | Multi-agent legal team — contract review, risk assessment, compliance check & due diligence powered by GPT-4o | Agno, OpenAI GPT-4o, DuckDuckGo, Streamlit |   ⭐⭐⭐   |          [▶️](./13%20Legal%20Agent)          |
 | 13  | [📚 **AI Tutor — Smart Quiz Generator**](./15%20ai-tutor)                | Converts PDF/Word study materials into chapter-wise AI quizzes with auto-grading and feedback                 | Python, NLP, Vector Embeddings, Node.js    |   ⭐⭐⭐   |             [▶️](./15%20ai-tutor)            |
 | 14  | [🎨 **UI/UX Feedback Agent Team**](./16_UI_UX%20Feedback%20Agent_Nano_banana) | 5-specialist multi-agent design crew — critic, strategist, implementer, A11y auditor, CRO optimizer + Streamlit UI | Google ADK, Gemini 2.5 Flash, Nano Banana, Streamlit | ⭐⭐⭐⭐ | [▶️](./16_UI_UX%20Feedback%20Agent_Nano_banana) |
+| 15  | [📜 **ClauseAI — Contract Analysis**](./Contract%20Analysis) | Industry-grade multi-agent contract review — 7 parallel specialists for risk scoring, missing-clause detection, conflict detection, GDPR/CCPA/HIPAA/SOX compliance, PII flagging, redlined DOCX export & grounded Q&A chat | LangGraph, OpenAI (4o + 4o-mini), FAISS, Pydantic, Streamlit | ⭐⭐⭐⭐ | [▶️](./Contract%20Analysis/streamlit_app) |
 
 ### 📈 Difficulty Legend
 
@@ -576,6 +577,17 @@ agent-forge/
 │   ├── app.py                    # Streamlit UI
 │   └── README.md                 # Documentation
 │
+├── 📁 Contract Analysis/                # 🆕 ClauseAI — industry-grade contract review
+│   ├── ClauseAI.ipynb            # End-to-end notebook (FAISS + LangGraph)
+│   ├── data/clauses.json         # Reference clause library (50 clauses, 6 types)
+│   └── streamlit_app/            # Production multi-tab UI
+│       ├── app.py                # 9-tab Streamlit entrypoint
+│       ├── config.py             # Env-driven settings
+│       ├── core/                 # state · graph · nodes · reporter · retrievers · chat · exporters
+│       ├── prompts/prompts.py    # Centralized prompts
+│       ├── ui/                   # sidebar · components · views
+│       └── README.md             # Documentation
+│
 ├── 📁 .github/
 │   ├── ISSUE_TEMPLATE/           # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md  # PR template
@@ -602,6 +614,7 @@ agent-forge/
 - [x] Add AI Legal Agent Team — multi-agent legal analysis
 - [x] Add AI Tutor — PDF → quiz generator
 - [x] Add UI/UX Feedback Agent Team — 5-specialist design crew
+- [x] Add ClauseAI — industry-grade multi-agent contract review (LangGraph + OpenAI)
 - [x] Rebrand to **Agent Forge** — open-ended, no-deadline collection
 - [x] Comprehensive documentation
 - [x] Contributor guidelines
@@ -717,7 +730,7 @@ Yes! This project is licensed under Apache 2.0. You can use, modify, and distrib
 <details>
 <summary><strong>Q: Which agent should I start with?</strong></summary>
 
-If you're new to AI agents, start with **#2 Web Search & Summarizer** — it's simple but demonstrates the core ReAct loop. For multi-agent patterns, try **#14 UI/UX Feedback Agent Team** (coordinator + 5 specialists). For production-grade patterns with RAG + memory + MCP, try **#10 OpenClaw**.
+If you're new to AI agents, start with **#2 Web Search & Summarizer** — it's simple but demonstrates the core ReAct loop. For multi-agent patterns, try **#14 UI/UX Feedback Agent Team** (coordinator + 5 specialists) or **#15 ClauseAI** (LangGraph parallel fan-out / map-reduce). For production-grade patterns with RAG + memory + MCP, try **#10 OpenClaw**.
 
 </details>
 
