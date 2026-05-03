@@ -1,0 +1,282 @@
+[
+  {
+    "contract_type": "General Clauses",
+    "clauses": [
+      {
+        "clause_title": "Governing Law",
+        "clause_text": "This Agreement shall be governed by and construed in accordance with the laws of [Jurisdiction], without regard to its conflict of laws principles. Any dispute arising under or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts located in [Jurisdiction].",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Entire Agreement",
+        "clause_text": "This Agreement constitutes the entire agreement between the parties and supersedes all prior or contemporaneous agreements, whether written or oral, relating to the subject matter hereof.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Severability",
+        "clause_text": "If any provision of this Agreement is held to be invalid or unenforceable, such provision shall be modified to the minimum extent necessary to make it enforceable, and the remaining provisions shall continue in full force and effect.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Force Majeure",
+        "clause_text": "Neither party shall be liable for any failure or delay in performance under this Agreement due to causes beyond its reasonable control, including without limitation acts of God, war, terrorism, epidemics, pandemics, governmental orders, or natural disasters.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Notices",
+        "clause_text": "All notices required or permitted under this Agreement shall be in writing and delivered by certified mail, courier, or email to the addresses specified by the parties. Notices shall be deemed received upon confirmation of delivery.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Assignment",
+        "clause_text": "Neither party may assign this Agreement, in whole or in part, without the prior written consent of the other party, except that either party may assign this Agreement to a successor in connection with a merger, acquisition, or sale of substantially all assets.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Waiver",
+        "clause_text": "No waiver of any term or condition of this Agreement shall be effective unless in writing signed by the party against whom such waiver is sought to be enforced. No waiver shall constitute a continuing waiver.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Counterparts",
+        "clause_text": "This Agreement may be executed in counterparts, each of which shall be deemed an original, and all of which together shall constitute one and the same instrument. Electronic signatures shall have the same force and effect as original signatures.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Dispute Resolution",
+        "clause_text": "Any dispute arising out of this Agreement shall first be addressed through good-faith negotiation. If unresolved within thirty (30) days, the dispute shall be submitted to binding arbitration administered by [Arbitration Body] in [Jurisdiction].",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Indemnification",
+        "clause_text": "Each party shall indemnify, defend, and hold harmless the other party from and against any third-party claims, damages, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of the indemnifying party's breach of this Agreement, gross negligence, or willful misconduct.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Limitation of Liability",
+        "clause_text": "Except for breaches of confidentiality, indemnification obligations, or willful misconduct, neither party's aggregate liability under this Agreement shall exceed the fees paid or payable in the twelve (12) months preceding the claim. Neither party shall be liable for indirect, incidental, consequential, or punitive damages.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Confidentiality",
+        "clause_text": "Each party agrees to maintain the confidentiality of any non-public information disclosed by the other party and to use such information solely for purposes of performing under this Agreement. Confidentiality obligations shall survive termination for a period of five (5) years.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      }
+    ]
+  },
+  {
+    "contract_type": "Employment Contract",
+    "clauses": [
+      {
+        "clause_title": "Position and Duties",
+        "clause_text": "Employee shall serve in the position of [Job Title] and shall perform all duties reasonably assigned by the Employer consistent with such position. Employee agrees to devote substantially all business time and best efforts to the performance of these duties.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Compensation",
+        "clause_text": "Employer shall pay Employee a base salary of [Amount] per annum, payable in accordance with Employer's standard payroll practices, less applicable withholdings. Employee may be eligible for performance-based bonuses and equity grants subject to Board approval.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Benefits",
+        "clause_text": "Employee shall be entitled to participate in all employee benefit plans, including health insurance, retirement plans, and paid time off, in accordance with the terms of such plans as in effect from time to time.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Term and Termination",
+        "clause_text": "Employment is at-will and may be terminated by either party at any time, with or without cause, upon written notice. Upon termination, Employee shall be entitled to accrued but unpaid compensation and benefits.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Non-Compete",
+        "clause_text": "During employment and for twelve (12) months thereafter, Employee shall not directly or indirectly engage in any business that competes with Employer within the geographic territory in which Employer operates. This restriction is limited to roles substantially similar to those performed by Employee.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Non-Solicitation",
+        "clause_text": "During employment and for twelve (12) months thereafter, Employee shall not solicit or induce any employee, customer, or supplier of Employer to terminate or modify their relationship with Employer.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Intellectual Property Assignment",
+        "clause_text": "Employee assigns to Employer all right, title, and interest in any inventions, works of authorship, or other intellectual property created during the course of employment that relate to Employer's business.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Confidentiality and Trade Secrets",
+        "clause_text": "Employee shall maintain the confidentiality of all proprietary information of Employer during and after employment, and shall not use or disclose such information except as required to perform Employee's duties.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Severance",
+        "clause_text": "If Employer terminates Employee without Cause, Employee shall receive severance equal to [N] months of base salary, continued benefits coverage, and accelerated vesting of equity, subject to execution of a release of claims.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Work Eligibility",
+        "clause_text": "Employee represents that they are legally authorized to work in the jurisdiction of employment and shall provide documentation as required by law.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      }
+    ]
+  },
+  {
+    "contract_type": "NDA",
+    "clauses": [
+      {
+        "clause_title": "Definition of Confidential Information",
+        "clause_text": "Confidential Information means all non-public information disclosed by one party to the other, whether orally, in writing, or by inspection, that is designated as confidential or that reasonably should be understood to be confidential given its nature.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Obligations of Receiving Party",
+        "clause_text": "The Receiving Party shall (i) hold Confidential Information in strict confidence, (ii) use it solely for the Permitted Purpose, and (iii) protect it with the same degree of care it uses to protect its own confidential information, but no less than reasonable care.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Exclusions from Confidentiality",
+        "clause_text": "Confidential Information does not include information that (a) is or becomes publicly known without breach, (b) was known prior to disclosure, (c) is independently developed without use of Confidential Information, or (d) is rightfully obtained from a third party without restriction.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Term of Confidentiality",
+        "clause_text": "The Receiving Party's obligations under this Agreement shall survive for a period of five (5) years from the date of disclosure, except for trade secrets, which shall remain protected for as long as they qualify as trade secrets under applicable law.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Return or Destruction",
+        "clause_text": "Upon written request or termination of the relationship, the Receiving Party shall promptly return or destroy all Confidential Information and certify such destruction in writing.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "No License",
+        "clause_text": "Nothing in this Agreement grants any license or right under any patent, copyright, trademark, or other intellectual property right of the Disclosing Party.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Compelled Disclosure",
+        "clause_text": "If the Receiving Party is legally compelled to disclose Confidential Information, it shall provide prompt written notice to the Disclosing Party (where legally permitted) and reasonably cooperate in seeking a protective order.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      }
+    ]
+  },
+  {
+    "contract_type": "License Agreement",
+    "clauses": [
+      {
+        "clause_title": "Grant of License",
+        "clause_text": "Licensor grants to Licensee a non-exclusive, non-transferable, revocable license to use the Licensed Materials solely for the Permitted Use during the Term, subject to the terms of this Agreement.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Restrictions on Use",
+        "clause_text": "Licensee shall not (a) modify, reverse engineer, or create derivative works of the Licensed Materials, (b) sublicense, sell, or transfer the Licensed Materials, or (c) use the Licensed Materials in violation of applicable law.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Fees and Payment",
+        "clause_text": "Licensee shall pay the fees set forth in the applicable Order Form. Fees are non-refundable except as expressly provided. Late payments shall accrue interest at the lesser of 1.5% per month or the maximum rate permitted by law.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Ownership",
+        "clause_text": "Licensor retains all right, title, and interest in and to the Licensed Materials, including all intellectual property rights. No rights are granted to Licensee other than those expressly set forth in this Agreement.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Warranties and Disclaimers",
+        "clause_text": "Licensor warrants that the Licensed Materials will perform substantially in accordance with the Documentation. EXCEPT AS EXPRESSLY PROVIDED, THE LICENSED MATERIALS ARE PROVIDED 'AS IS' WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Termination for Breach",
+        "clause_text": "Either party may terminate this Agreement upon thirty (30) days' written notice if the other party materially breaches and fails to cure within the notice period. Upon termination, Licensee shall cease all use and destroy copies of the Licensed Materials.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Audit Rights",
+        "clause_text": "Licensor may, upon reasonable notice, audit Licensee's use of the Licensed Materials no more than once per year to verify compliance. Audits shall be conducted during business hours and shall not unreasonably interfere with Licensee's operations.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      }
+    ]
+  },
+  {
+    "contract_type": "Service Agreement",
+    "clauses": [
+      {
+        "clause_title": "Scope of Services",
+        "clause_text": "Service Provider shall perform the services set forth in the Statement of Work attached as Exhibit A. Any changes to scope shall be agreed in writing through a change order.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Service Levels",
+        "clause_text": "Service Provider shall meet the service level commitments set forth in Exhibit B. Failure to meet service levels shall entitle Customer to service credits as specified therein.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Fees and Invoicing",
+        "clause_text": "Customer shall pay Service Provider the fees set forth in the Order Form. Service Provider shall invoice monthly in arrears, and payment is due within thirty (30) days of invoice date.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Data Protection",
+        "clause_text": "Service Provider shall process Customer Data in accordance with applicable data protection laws (including GDPR and CCPA where applicable) and the Data Processing Addendum incorporated into this Agreement.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Security",
+        "clause_text": "Service Provider shall maintain commercially reasonable administrative, physical, and technical safeguards designed to protect Customer Data, consistent with industry standards such as ISO 27001 or SOC 2.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Subcontractors",
+        "clause_text": "Service Provider may engage subcontractors to perform services, provided that Service Provider remains responsible for their performance and ensures they are bound by confidentiality and data protection obligations no less stringent than those in this Agreement.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Acceptance",
+        "clause_text": "Deliverables shall be deemed accepted upon Customer's written approval or fifteen (15) days after delivery if no rejection notice is provided. Rejected deliverables shall be corrected and resubmitted at Service Provider's expense.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      }
+    ]
+  },
+  {
+    "contract_type": "SaaS Agreement",
+    "clauses": [
+      {
+        "clause_title": "Subscription and Access",
+        "clause_text": "Provider grants Customer a non-exclusive, non-transferable subscription to access and use the Service during the Subscription Term, solely for Customer's internal business purposes.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Uptime SLA",
+        "clause_text": "Provider shall use commercially reasonable efforts to ensure the Service is available at least 99.9% of the time, measured monthly, excluding scheduled maintenance and force majeure events.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Customer Data",
+        "clause_text": "As between the parties, Customer owns all Customer Data. Customer grants Provider a limited license to use Customer Data solely to provide and improve the Service, in accordance with the Data Processing Addendum.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Acceptable Use",
+        "clause_text": "Customer shall not (a) use the Service to violate applicable law, (b) attempt to gain unauthorized access, (c) interfere with the integrity of the Service, or (d) use the Service to send unsolicited communications or malicious code.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Subscription Renewal",
+        "clause_text": "Subscriptions shall automatically renew for successive periods equal to the initial term unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Data Export and Deletion",
+        "clause_text": "Upon termination, Provider shall make Customer Data available for export for thirty (30) days, after which Provider shall delete Customer Data in accordance with its data retention policy and applicable law.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      },
+      {
+        "clause_title": "Security and Compliance",
+        "clause_text": "Provider shall maintain a security program aligned with industry standards (e.g., SOC 2 Type II, ISO 27001) and shall promptly notify Customer of any Security Incident affecting Customer Data.",
+        "metadata": {"jurisdiction": "US", "version": "1.0", "last_updated": "2025-01-01"}
+      }
+    ]
+  }
+]
