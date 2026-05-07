@@ -1,0 +1,6 @@
+{
+  "include": ["src", "tests", "ai_real_estate_agent_team.py", "local_ai_real_estate_agent_team.py"],
+  "extraPaths": ["src"],
+  "pythonVersion": "3.10",
+  "reportMissingImports": "warning"
+}
