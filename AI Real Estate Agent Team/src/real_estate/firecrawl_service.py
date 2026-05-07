@@ -14,8 +14,6 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from firecrawl import FirecrawlApp
-
 from .config import get_settings
 from .schemas import PropertyListing, SearchCriteria
 
@@ -92,6 +90,10 @@ class FirecrawlService:
         resolved_key = api_key or settings.firecrawl_api_key
         if not resolved_key:
             raise ValueError("FIRECRAWL_API_KEY is not configured.")
+        # Imported lazily so tests for `build_search_urls` / `select_urls`
+        # don't require the `firecrawl` package to be installed.
+        from firecrawl import FirecrawlApp
+
         self._client = FirecrawlApp(api_key=resolved_key)
         self._settings = settings
         self._cache_dir: Path = settings.cache_dir
