@@ -588,6 +588,22 @@ agent-forge/
 │       ├── ui/                   # sidebar · components · views
 │       └── README.md             # Documentation
 │
+├── 📁 AI Real Estate Agent Team/        # 🆕 Multi-agent property search + analytics
+│   ├── ai_real_estate_agent_team.py     # Cloud entry (Gemini/OpenAI/Anthropic)
+│   ├── local_ai_real_estate_agent_team.py # Local entry (Ollama)
+│   ├── src/real_estate/                 # Modular core
+│   │   ├── config.py · schemas.py · prompts.py
+│   │   ├── firecrawl_service.py         # Retry + cache + URL builder
+│   │   ├── llm_factory.py               # Pluggable provider factory
+│   │   ├── pipeline.py                  # 4-stage pipeline
+│   │   ├── scoring.py                   # Deterministic 0–100 investment score
+│   │   ├── analytics.py                 # Plotly metrics + charts
+│   │   ├── history.py · exporters.py    # SQLite history · MD/JSON/CSV
+│   │   └── ui.py                        # Streamlit views (search/analytics/compare/history/export)
+│   ├── tests/                           # pytest: URL builder + scoring
+│   ├── .env.example · pyrightconfig.json
+│   └── README.md                        # Full documentation
+│
 ├── 📁 .github/
 │   ├── ISSUE_TEMPLATE/           # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md  # PR template
@@ -615,6 +631,7 @@ agent-forge/
 - [x] Add AI Tutor — PDF → quiz generator
 - [x] Add UI/UX Feedback Agent Team — 5-specialist design crew
 - [x] Add ClauseAI — industry-grade multi-agent contract review (LangGraph + OpenAI)
+- [x] Add AI Real Estate Agent Team — multi-source listings, deterministic scoring, full analytics dashboard
 - [x] Rebrand to **Agent Forge** — open-ended, no-deadline collection
 - [x] Comprehensive documentation
 - [x] Contributor guidelines
