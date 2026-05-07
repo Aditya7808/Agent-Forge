@@ -214,6 +214,7 @@ Progress: ███████████████████████�
 | 13  | [📚 **AI Tutor — Smart Quiz Generator**](./15%20ai-tutor)                | Converts PDF/Word study materials into chapter-wise AI quizzes with auto-grading and feedback                 | Python, NLP, Vector Embeddings, Node.js    |   ⭐⭐⭐   |             [▶️](./15%20ai-tutor)            |
 | 14  | [🎨 **UI/UX Feedback Agent Team**](./16_UI_UX%20Feedback%20Agent_Nano_banana) | 5-specialist multi-agent design crew — critic, strategist, implementer, A11y auditor, CRO optimizer + Streamlit UI | Google ADK, Gemini 2.5 Flash, Nano Banana, Streamlit | ⭐⭐⭐⭐ | [▶️](./16_UI_UX%20Feedback%20Agent_Nano_banana) |
 | 15  | [📜 **ClauseAI — Contract Analysis**](./Contract%20Analysis) | Industry-grade multi-agent contract review — 7 parallel specialists for risk scoring, missing-clause detection, conflict detection, GDPR/CCPA/HIPAA/SOX compliance, PII flagging, redlined DOCX export & grounded Q&A chat | LangGraph, OpenAI (4o + 4o-mini), FAISS, Pydantic, Streamlit | ⭐⭐⭐⭐ | [▶️](./Contract%20Analysis/streamlit_app) |
+| 16  | [🏠 **AI Real Estate Agent Team**](./AI%20Real%20Estate%20Agent%20Team) | Multi-agent property search across Zillow/Realtor/Trulia/Homes — deterministic 0–100 investment scoring, 6-chart Plotly analytics dashboard, Firecrawl cache, SQLite search history, Markdown/JSON/CSV exports, pluggable LLM (Gemini · OpenAI · Anthropic · Ollama) | Agno, Firecrawl, Pydantic, Plotly, SQLite, Streamlit | ⭐⭐⭐⭐ | [▶️](./AI%20Real%20Estate%20Agent%20Team) |
 
 ### 📈 Difficulty Legend
 
