@@ -747,7 +747,7 @@ Yes! This project is licensed under Apache 2.0. You can use, modify, and distrib
 <details>
 <summary><strong>Q: Which agent should I start with?</strong></summary>
 
-If you're new to AI agents, start with **#2 Web Search & Summarizer** — it's simple but demonstrates the core ReAct loop. For multi-agent patterns, try **#14 UI/UX Feedback Agent Team** (coordinator + 5 specialists) or **#15 ClauseAI** (LangGraph parallel fan-out / map-reduce). For production-grade patterns with RAG + memory + MCP, try **#10 OpenClaw**.
+If you're new to AI agents, start with **#2 Web Search & Summarizer** — it's simple but demonstrates the core ReAct loop. For multi-agent patterns, try **#14 UI/UX Feedback Agent Team** (coordinator + 5 specialists), **#15 ClauseAI** (LangGraph parallel fan-out / map-reduce), or **#16 AI Real Estate Agent Team** (sequential pipeline + deterministic scoring + analytics). For production-grade patterns with RAG + memory + MCP, try **#10 OpenClaw**.
 
 </details>
 
