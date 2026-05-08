@@ -5,65 +5,61 @@ from langchain.tools import tool
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from shoppinggpt.config import EMBEDDINGS, DATA_TEXT_PATH, STORE_DIRECTORY
+from shoppinggpt.config import get_embeddings, DATA_TEXT_PATH, STORE_DIRECTORY
+
 
 class VectorStoreManager:
+    _instance = None
+
     def __init__(self, data_path: str, store_directory: str, embeddings):
         self.data_path = data_path
         self.store_directory = store_directory
         self.embeddings = embeddings
-        self.vectorstore = self.load_or_create_vectorstore()
+        self.vectorstore = self._load_or_create()
 
-    def load_vectorstore(self):
-        return FAISS.load_local(
-            self.store_directory,
-            self.embeddings,
-            allow_dangerous_deserialization=True
-        )
+    @classmethod
+    def get_instance(cls, data_path: str, store_directory: str, embeddings):
+        if cls._instance is None:
+            cls._instance = cls(data_path, store_directory, embeddings)
+        return cls._instance
 
-    def create_vectorstore(self):
-        loader = TextLoader(self.data_path, encoding='utf8')
+    def _load_or_create(self):
+        index_path = os.path.join(self.store_directory, "index.faiss")
+        if os.path.exists(index_path):
+            return FAISS.load_local(
+                self.store_directory,
+                self.embeddings,
+                allow_dangerous_deserialization=True,
+            )
+        return self._create_vectorstore()
+
+    def _create_vectorstore(self):
+        loader = TextLoader(self.data_path, encoding="utf8")
         documents = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=200
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=800,
+            chunk_overlap=150,
+            separators=["\n\n", "\n", ". ", " ", ""],
         )
-        document_chunks = text_splitter.split_documents(documents)
-
-        vectorstore = FAISS.from_documents(document_chunks, self.embeddings)
+        chunks = splitter.split_documents(documents)
+        vectorstore = FAISS.from_documents(chunks, self.embeddings)
+        os.makedirs(self.store_directory, exist_ok=True)
         vectorstore.save_local(self.store_directory)
         return vectorstore
-
-    def check_existing_vectorstore(self):
-        return os.path.exists(os.path.join(self.store_directory, "index.faiss"))
-
-    def load_or_create_vectorstore(self):
-        if self.check_existing_vectorstore():
-            return self.load_vectorstore()
-        else:
-            return self.create_vectorstore()
-
-    @staticmethod
-    def create(data_path: str, store_directory: str, embeddings):
-        return VectorStoreManager(data_path, store_directory, embeddings)
 
 
 @tool
 def policy_search_tool(query: str) -> List[str]:
-    """
-    Search for information related to company policies.
+    """Search store policies for information about shipping, returns, payments, accounts, and other customer service topics.
 
     Args:
-        query (str): The search query to find information.
+        query: The customer question about store policies.
 
     Returns:
-        List[str]: The search results as a list of text strings.
+        List of relevant policy excerpts.
     """
-    vector_store_manager = VectorStoreManager.create(
-        DATA_TEXT_PATH,
-        STORE_DIRECTORY,
-        EMBEDDINGS
+    manager = VectorStoreManager.get_instance(
+        DATA_TEXT_PATH, STORE_DIRECTORY, get_embeddings()
     )
-
-    results = vector_store_manager.vectorstore.similarity_search(query, k=5)
+    results = manager.vectorstore.similarity_search(query, k=5)
     return [doc.page_content for doc in results]

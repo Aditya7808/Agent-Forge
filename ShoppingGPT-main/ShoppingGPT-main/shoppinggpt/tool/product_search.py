@@ -4,41 +4,33 @@ from typing import Union, List, Dict
 from langchain.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain.tools import tool
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 
-from shoppinggpt.config import GOOGLE_API_KEY, DATA_PRODUCT_PATH
+from shoppinggpt.config import OPENAI_API_KEY, DATA_PRODUCT_PATH
 
-PRODUCT_RECOMMENDATION_PROMPT = """
-    You are a chatbot assistant specializing in providing product information and
-    recommendations using SQL queries.
-    Your primary tasks are:
+PRODUCT_RECOMMENDATION_PROMPT = """You are a SQL expert for a fashion store database.
+Generate a single SQLite query for the user's request.
 
-    Provide detailed information about a specific product based on user queries.
-    Recommend relevant products to users based on their preferences and requirements.
+The 'products' table has these columns:
+- product_code (TEXT, primary key)
+- product_name (TEXT)
+- material (TEXT)
+- size (TEXT, comma-separated e.g. "S, M, L, XL")
+- color (TEXT, comma-separated e.g. "Đen, Trắng")
+- brand (TEXT)
+- gender (TEXT: Nam/Nữ/Unisex)
+- stock_quantity (INTEGER)
+- price (REAL, in VND)
 
-    The database table 'products' contains the following columns about product information:
+Rules:
+- Use LIKE with % for partial text matches (case-insensitive).
+- For size/color searches, use LIKE since values are comma-separated.
+- Only SELECT queries are allowed. Never INSERT, UPDATE, DELETE, or DROP.
+- Output ONLY the raw SQL query. No markdown, no backticks, no explanation.
 
-    product_code: A unique identifier for each product (TEXT)
-    product_name: The name of the product (TEXT)
-    material: The material composition of the product (TEXT)
-    size: The available sizes of the product (TEXT)
-    color: The available colors of the product (TEXT)
-    brand: The brand that manufactures or sells the product (TEXT)
-    gender: The product for target gender(e.g., male, female, unisex) (TEXT)
-    stock_quantity: The quantity of the product available in stock (INTEGER)
-    price: The price of the product (REAL)
-
-    To provide product information or recommend products, generate an SQL query that:
-
-    Handles product names in a case-insensitive manner and allows for partial matches.
-    Retrieves all relevant columns of information about the requested product or filters products based on criteria.
-    Uses efficient indexing and filtering techniques to retrieve data.
-    Ensures SQL injection prevention by using parameterized queries.
-
-    Output only the SQL query. Do not include any explanations, comments, quotation marks, or additional information. Only output the query itself.
-    Start!
-    Question: {input}
+Question: {input}
 """
+
 
 class ProductDataLoader:
     def __init__(self, db_path: str):
@@ -61,48 +53,54 @@ class ProductDataLoader:
 
     @staticmethod
     def clean_sql_query(query: str) -> str:
-        return query.replace('```sql', '').replace('```', '').strip()
+        cleaned = query.strip()
+        for wrapper in ["```sql", "```SQL", "```"]:
+            cleaned = cleaned.replace(wrapper, "")
+        return cleaned.strip()
 
-    def execute_query(self, query: str, params: tuple = ()) -> List[Dict]:
+    def execute_query(self, query: str) -> List[Dict]:
         if not self.conn:
             self.connect()
+        cleaned = self.clean_sql_query(query)
+        forbidden = ["INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "CREATE", "TRUNCATE"]
+        upper = cleaned.upper()
+        for keyword in forbidden:
+            if keyword in upper:
+                raise ValueError(f"Forbidden SQL operation: {keyword}")
         cursor = self.conn.cursor()
-        cleaned_query = self.clean_sql_query(query)
-        cursor.execute(cleaned_query, params)
+        cursor.execute(cleaned)
         columns = [col[0] for col in cursor.description]
         return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
+
 @tool
 def product_search_tool(input: str) -> Union[List[Dict], str]:
-    """
-    Tìm kiếm thông tin liên quan tới sản phẩm và trả về các thông tin liên quan sử dụng SQLite.
+    """Search for product information in the store database using natural language.
 
     Args:
-        input (str): Chuỗi tìm kiếm để tìm các sản phẩm.
+        input: Natural language query about products (price, color, size, brand, etc.)
 
     Returns:
-        Union[List[Dict], str]: Kết quả tìm kiếm dưới dạng danh sách từ điển hoặc thông báo lỗi nếu có.
+        List of matching products or an error message.
     """
     try:
-        llm = ChatGoogleGenerativeAI(temperature=0, model="gemini-1.5-flash", google_api_key=GOOGLE_API_KEY)
+        llm = ChatOpenAI(
+            temperature=0,
+            model="gpt-4o-mini",
+            api_key=OPENAI_API_KEY,
+        )
         prompt = PromptTemplate(
             template=PRODUCT_RECOMMENDATION_PROMPT,
-            input_variables=["input"]
+            input_variables=["input"],
         )
-        
-        with ProductDataLoader(f"{DATA_PRODUCT_PATH}") as product_data_loader:
-            def execute_sql_query(query: str) -> List[Dict]:
-                return product_data_loader.execute_query(query)
-            
+
+        with ProductDataLoader(DATA_PRODUCT_PATH) as loader:
             chain = (
                 {"input": RunnablePassthrough()}
                 | prompt
                 | llm
-                | (lambda x: execute_sql_query(x.content))
+                | (lambda x: loader.execute_query(x.content))
             )
-            result = chain.invoke(input)
-        
-        return result
+            return chain.invoke(input)
     except Exception as e:
-        return f"An error occurred: {str(e)}"
-
+        return f"Product search error: {e}"

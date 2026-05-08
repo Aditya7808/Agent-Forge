@@ -1,73 +1,126 @@
-from flask import Flask, render_template, request, jsonify
-from dotenv import load_dotenv
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.memory import ConversationBufferMemory
-from shoppinggpt.router.lib_semantic_router import (
-    SemanticRouter,
-    PRODUCT_ROUTE_NAME,
-    CHITCHAT_ROUTE_NAME
-)
-from shoppinggpt.chain import create_chitchat_chain
-from shoppinggpt.agent import ShoppingAgent
+import logging
+from datetime import datetime
 
-# Load environment variables
+from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
+from dotenv import load_dotenv
+
 load_dotenv()
-load_dotenv(r"E:\chatbot\ShoppingGPT\.env")
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-# LLM and Embedding setup
-LLM = ChatGoogleGenerativeAI(temperature=0, model="gemini-1.5-flash")
-
-# Memory setup
-SHARED_MEMORY = ConversationBufferMemory(return_messages=True)
-
-# Initialize SemanticRouter
-SEMANTIC_ROUTER = SemanticRouter()
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+app.secret_key = os.getenv("FLASK_SECRET_KEY", os.urandom(32).hex())
+CORS(app)
+
+_llm = None
+_memory = None
+_router = None
+
+
+def _get_llm():
+    global _llm
+    if _llm is None:
+        from langchain_openai import ChatOpenAI
+        _llm = ChatOpenAI(
+            temperature=0.1,
+            model="gpt-4o-mini",
+            api_key=os.getenv("OPENAI_API_KEY"),
+        )
+    return _llm
+
+
+def _get_memory():
+    global _memory
+    if _memory is None:
+        from langchain.memory import ConversationBufferWindowMemory
+        _memory = ConversationBufferWindowMemory(
+            return_messages=True,
+            memory_key="chat_history",
+            k=20,
+        )
+    return _memory
+
+
+def _get_router():
+    global _router
+    if _router is None:
+        from shoppinggpt.router.lib_semantic_router import SemanticRouter
+        logger.info("Initializing semantic router...")
+        _router = SemanticRouter()
+        logger.info("Semantic router ready.")
+    return _router
+
 
 def handle_query(query: str) -> dict:
-    """Handle user query and return response."""
-    guided_route = SEMANTIC_ROUTER.guide(query)
-    
-    if guided_route == CHITCHAT_ROUTE_NAME:
-        chitchat_chain = create_chitchat_chain(LLM, SHARED_MEMORY)
-        response = chitchat_chain.invoke({"input": query})
-    elif guided_route == PRODUCT_ROUTE_NAME:
-        agent = ShoppingAgent(LLM, SHARED_MEMORY)
-        response = agent.invoke(query)
-    else:
-        response = "Unknown query type"
-    
-    # Get content from response
-    content = (
-        response.content if hasattr(response, 'content')
-        else response['output'] if isinstance(response, dict) and 'output' in response
-        else str(response)
-    )
-    
-    # Update shared memory
-    SHARED_MEMORY.chat_memory.add_user_message(query)
-    SHARED_MEMORY.chat_memory.add_ai_message(content)
-    
-    return {
-        'response': content,
-        'type': guided_route
-    }
+    from shoppinggpt.router.lib_semantic_router import PRODUCT_ROUTE_NAME, CHITCHAT_ROUTE_NAME
+    from shoppinggpt.chain import create_chitchat_chain
+    from shoppinggpt.agent import ShoppingAgent
 
-@app.route('/')
+    query = query.strip()
+    if not query:
+        return {"response": "Please enter a message.", "type": "error"}
+
+    try:
+        guided_route = _get_router().guide(query)
+    except Exception:
+        logger.exception("Router error, falling back to chitchat")
+        guided_route = CHITCHAT_ROUTE_NAME
+
+    llm = _get_llm()
+    memory = _get_memory()
+
+    try:
+        if guided_route == PRODUCT_ROUTE_NAME:
+            agent = ShoppingAgent(llm, memory)
+            response = agent.invoke(query)
+        else:
+            chain = create_chitchat_chain(llm, memory)
+            raw = chain.invoke({"input": query})
+            response = raw.content if hasattr(raw, "content") else str(raw)
+    except Exception:
+        logger.exception("LLM invocation error")
+        response = "Sorry, something went wrong processing your request. Please try again."
+        guided_route = "error"
+
+    memory.chat_memory.add_user_message(query)
+    memory.chat_memory.add_ai_message(response)
+
+    return {"response": response, "type": guided_route}
+
+
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/get', methods=['GET'])
-def get_bot_response():
-    user_message = request.args.get('msg')
-    response = handle_query(user_message)
-    print(f"User message: {user_message}")
-    print(f"Bot response: {response}")
-    return jsonify(response)
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    data = request.get_json(silent=True) or {}
+    user_message = data.get("message", "").strip()
+    if not user_message:
+        return jsonify({"error": "Empty message"}), 400
+
+    logger.info("User: %s", user_message[:100])
+    result = handle_query(user_message)
+    logger.info("Route: %s | Response length: %d", result["type"], len(result["response"]))
+    return jsonify(result)
+
+
+@app.route("/api/health")
+def health():
+    return jsonify({"status": "ok", "timestamp": datetime.utcnow().isoformat()})
+
+
+@app.route("/get", methods=["GET"])
+def get_bot_response_legacy():
+    user_message = request.args.get("msg", "").strip()
+    if not user_message:
+        return jsonify({"error": "Empty message"}), 400
+    return jsonify(handle_query(user_message))
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)
