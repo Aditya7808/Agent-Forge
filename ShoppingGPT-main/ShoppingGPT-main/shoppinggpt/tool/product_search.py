@@ -1,108 +1,129 @@
-import sqlite3
-from typing import Union, List, Dict
+"""Product search tool.
 
-from langchain.prompts import PromptTemplate
-from langchain_core.runnables import RunnablePassthrough
-from langchain.tools import tool
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-from shoppinggpt.config import GOOGLE_API_KEY, DATA_PRODUCT_PATH
-
-PRODUCT_RECOMMENDATION_PROMPT = """
-    You are a chatbot assistant specializing in providing product information and
-    recommendations using SQL queries.
-    Your primary tasks are:
-
-    Provide detailed information about a specific product based on user queries.
-    Recommend relevant products to users based on their preferences and requirements.
-
-    The database table 'products' contains the following columns about product information:
-
-    product_code: A unique identifier for each product (TEXT)
-    product_name: The name of the product (TEXT)
-    material: The material composition of the product (TEXT)
-    size: The available sizes of the product (TEXT)
-    color: The available colors of the product (TEXT)
-    brand: The brand that manufactures or sells the product (TEXT)
-    gender: The product for target gender(e.g., male, female, unisex) (TEXT)
-    stock_quantity: The quantity of the product available in stock (INTEGER)
-    price: The price of the product (REAL)
-
-    To provide product information or recommend products, generate an SQL query that:
-
-    Handles product names in a case-insensitive manner and allows for partial matches.
-    Retrieves all relevant columns of information about the requested product or filters products based on criteria.
-    Uses efficient indexing and filtering techniques to retrieve data.
-    Ensures SQL injection prevention by using parameterized queries.
-
-    Output only the SQL query. Do not include any explanations, comments, quotation marks, or additional information. Only output the query itself.
-    Start!
-    Question: {input}
+Translates natural-language product questions into a guarded SELECT query
+against the local SQLite catalogue. The LLM only ever produces a SELECT
+statement; the executor refuses anything else, which keeps the agent safe
+even if the model attempts a destructive action.
 """
+from __future__ import annotations
 
-class ProductDataLoader:
-    def __init__(self, db_path: str):
-        self.db_path = db_path
-        self.conn = None
+import re
+import sqlite3
+from contextlib import contextmanager
+from typing import Any, Dict, Iterator, List
 
-    def __enter__(self):
-        self.connect()
-        return self
+from langchain_core.prompts import PromptTemplate
+from langchain_core.tools import tool
+from langchain_core.runnables import RunnablePassthrough
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.close()
+from shoppinggpt.config import DATA_PRODUCT_PATH, build_llm
 
-    def connect(self):
-        self.conn = sqlite3.connect(self.db_path)
+PRODUCT_RECOMMENDATION_PROMPT = """You are a SQL generator for a fashion retail
+SQLite database. Translate the user's natural-language request into one
+SELECT statement.
 
-    def close(self):
-        if self.conn:
-            self.conn.close()
+Schema — table `products`:
+    product_code     TEXT     -- unique identifier (e.g. P001)
+    product_name     TEXT     -- product name in English
+    material         TEXT     -- e.g. cotton, denim, silk
+    size             TEXT     -- comma-separated sizes
+    color            TEXT     -- comma-separated colors
+    brand            TEXT
+    gender           TEXT     -- Men | Women | Unisex
+    stock_quantity   INTEGER
+    price            INTEGER  -- USD
 
-    @staticmethod
-    def clean_sql_query(query: str) -> str:
-        return query.replace('```sql', '').replace('```', '').strip()
+Rules:
+- Output ONLY the SQL. No prose. No markdown fences. No trailing semicolon.
+- Use case-insensitive LIKE for text searches: LOWER(column) LIKE LOWER('%term%').
+- Always limit results to 12 rows: append `LIMIT 12`.
+- Never write INSERT, UPDATE, DELETE, DROP, ALTER, ATTACH, PRAGMA, or VACUUM.
+- Order by stock_quantity DESC unless the user asks otherwise.
 
-    def execute_query(self, query: str, params: tuple = ()) -> List[Dict]:
-        if not self.conn:
-            self.connect()
-        cursor = self.conn.cursor()
-        cleaned_query = self.clean_sql_query(query)
-        cursor.execute(cleaned_query, params)
-        columns = [col[0] for col in cursor.description]
-        return [dict(zip(columns, row)) for row in cursor.fetchall()]
+Question: {input}
+SQL:"""
+
+_DENY_RE = re.compile(
+    r"\b(insert|update|delete|drop|alter|attach|detach|pragma|vacuum|replace|create)\b",
+    re.IGNORECASE,
+)
+
+
+def _is_safe_select(query: str) -> bool:
+    stripped = query.strip().rstrip(";").strip()
+    if not stripped:
+        return False
+    if not stripped.lower().startswith("select"):
+        return False
+    return _DENY_RE.search(stripped) is None
+
+
+def _clean_sql(text: str) -> str:
+    cleaned = text.strip()
+    cleaned = re.sub(r"^```(?:sql)?", "", cleaned, flags=re.IGNORECASE).strip()
+    cleaned = re.sub(r"```$", "", cleaned).strip()
+    return cleaned.rstrip(";").strip()
+
+
+@contextmanager
+def _connect(db_path: str) -> Iterator[sqlite3.Connection]:
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    try:
+        yield conn
+    finally:
+        conn.close()
+
+
+def execute_product_query(sql: str) -> List[Dict[str, Any]]:
+    if not _is_safe_select(sql):
+        raise ValueError("Refused: only single-statement SELECT queries are allowed.")
+    with _connect(DATA_PRODUCT_PATH) as conn:
+        cursor = conn.execute(sql)
+        return [dict(row) for row in cursor.fetchall()]
+
+
+def format_products(rows: List[Dict[str, Any]]) -> str:
+    if not rows:
+        return "No matching products were found in the catalogue."
+    lines = []
+    for row in rows:
+        price = row.get("price")
+        price_str = f"${int(price):,}" if isinstance(price, (int, float)) else "n/a"
+        lines.append(
+            f"- [{row.get('product_code')}] {row.get('product_name')} | "
+            f"{row.get('color') or 'n/a'} | size: {row.get('size') or 'n/a'} | "
+            f"{row.get('material') or 'n/a'} | brand: {row.get('brand') or 'n/a'} | "
+            f"stock: {row.get('stock_quantity', 0)} | price: {price_str}"
+        )
+    return "\n".join(lines)
+
 
 @tool
-def product_search_tool(input: str) -> Union[List[Dict], str]:
-    """
-    Tìm kiếm thông tin liên quan tới sản phẩm và trả về các thông tin liên quan sử dụng SQLite.
+def product_search_tool(query: str) -> str:
+    """Search the product catalogue for items matching the user's request.
 
-    Args:
-        input (str): Chuỗi tìm kiếm để tìm các sản phẩm.
-
-    Returns:
-        Union[List[Dict], str]: Kết quả tìm kiếm dưới dạng danh sách từ điển hoặc thông báo lỗi nếu có.
-    """
+    Use this tool whenever the user asks about specific products, prices,
+    colours, sizes, stock, or to filter the catalogue. Pass the user's
+    request verbatim; the tool will translate it into SQL and return a
+    formatted list of matching products."""
     try:
-        llm = ChatGoogleGenerativeAI(temperature=0, model="gemini-1.5-flash", google_api_key=GOOGLE_API_KEY)
+        llm = build_llm(temperature=0)
         prompt = PromptTemplate(
-            template=PRODUCT_RECOMMENDATION_PROMPT,
-            input_variables=["input"]
+            template=PRODUCT_RECOMMENDATION_PROMPT, input_variables=["input"]
         )
-        
-        with ProductDataLoader(f"{DATA_PRODUCT_PATH}") as product_data_loader:
-            def execute_sql_query(query: str) -> List[Dict]:
-                return product_data_loader.execute_query(query)
-            
-            chain = (
-                {"input": RunnablePassthrough()}
-                | prompt
-                | llm
-                | (lambda x: execute_sql_query(x.content))
-            )
-            result = chain.invoke(input)
-        
-        return result
-    except Exception as e:
-        return f"An error occurred: {str(e)}"
-
+        chain = (
+            {"input": RunnablePassthrough()}
+            | prompt
+            | llm
+            | (lambda msg: _clean_sql(msg.content))
+        )
+        sql = chain.invoke(query)
+        rows = execute_product_query(sql)
+        return format_products(rows)
+    except ValueError as err:
+        return f"Could not run that search: {err}"
+    except sqlite3.Error as err:
+        return f"Database error while searching: {err}"
+    except Exception as err:  # noqa: BLE001 — surface to the agent, not the user
+        return f"Unexpected error during product search: {err}"
