@@ -1,31 +1,31 @@
-﻿product_code,product_name,material,size,color,brand,gender,stock_quantity,price
-P001,Áo sơ mi trắng,Vải cotton,"S, M, L, XL",Trắng,XYZ,Unisex,50,350000
-P002,Quần jean xanh,Vải denim,"28, 30, 32, 34",Xanh,ABC,Nam,30,450000
-P003,Váy hoa,Vải voan,"S, M, L",Nhiều màu,DEF,Nữ,20,550000
-P004,Đầm đen,Vải lụa,"S, M, L",Đen,GHI,Nữ,10,1200000
-P005,Áo khoác da,Da,"M, L, XL",Đen,JKL,Nam,15,2500000
-P006,Quần shorts,Vải cotton,"S, M, L, XL","Xanh, Đen",MNO,Unisex,40,300000
-P007,Váy xòe,Vải chiffon,"S, M, L",Hồng,PQR,Nữ,25,600000
-P008,Áo phông in hình,Vải cotton,"S, M, L, XL","Trắng, Đen",STU,Unisex,35,250000
-P009,Quần tây,Vải polyester,"28, 30, 32, 34","Đen, Xám",VWX,Nam,45,700000
-P010,Đầm maxi,Vải chiffon,"S, M, L","Xanh, Trắng",YZA,Nữ,20,800000
-P011,Áo len,Len,"S, M, L, XL","Xanh, Đỏ",BCD,Unisex,50,500000
-P012,Quần legging,Vải spandex,"S, M, L","Đen, Xám",EFG,Nữ,30,350000
-P013,Váy bút chì,Vải polyester,"S, M, L",Đen,HIJ,Nữ,20,750000
-P014,Áo blouse,Vải lụa,"S, M, L","Trắng, Xanh",KLM,Nữ,25,400000
-P015,Quần jogger,Vải cotton,"S, M, L, XL","Đen, Xám",NOP,Unisex,35,450000
-P016,Váy midi,Vải lụa,"S, M, L","Hồng, Trắng",QRS,Nữ,20,700000
-P017,Áo thun dài tay,Vải cotton,"S, M, L, XL","Xanh, Đen",TUV,Unisex,50,300000
-P018,Quần kaki,Vải kaki,"28, 30, 32, 34","Nâu, Xanh",WXY,Nam,30,500000
-P019,Váy ren,Vải ren,"S, M, L","Đỏ, Đen",ZAB,Nữ,15,1000000
-P020,Đầm dự tiệc,Vải satin,"S, M, L","Xanh, Vàng",CDE,Nữ,10,1500000
-P021,Áo phông cổ tròn,Vải cotton,"S, M, L, XL","Đen, Trắng",FGHI,Unisex,60,200000
-P022,Quần short jean,Vải denim,"S, M, L, XL","Xanh, Trắng",JKLM,Nữ,40,350000
-P023,Váy bodycon,Vải polyester,"S, M, L","Đỏ, Đen",NOPQ,Nữ,15,900000
-P024,Đầm dạ hội,Vải satin,"S, M, L","Đỏ, Xanh",RSTU,Nữ,5,2000000
-P025,Áo hoodie,Vải nỉ,"S, M, L, XL","Xám, Đen",UVWX,Unisex,50,600000
-P026,Quần sweatpants,Vải cotton,"S, M, L, XL","Xám, Đen",YZAB,Unisex,30,500000
-P027,Váy ngắn xếp ly,Vải polyester,"S, M, L","Hồng, Đen",BCDE,Nữ,20,650000
-P028,Áo dài tay len,Len,"S, M, L, XL","Xám, Đen",DEFG,Unisex,25,700000
-P029,Quần ống rộng,Vải linen,"S, M, L","Trắng, Xám",FGHI,Nữ,15,750000
-P030,Đầm mùa hè,Vải cotton,"S, M, L","Vàng, Trắng",HIJK,Nữ,20,900000
+product_code,product_name,material,size,color,brand,gender,stock_quantity,price
+P001,White Cotton Shirt,Cotton,"S, M, L, XL",White,XYZ,Unisex,50,35
+P002,Blue Denim Jeans,Denim,"28, 30, 32, 34",Blue,ABC,Men,30,45
+P003,Floral Dress,Voile,"S, M, L",Multicolor,DEF,Women,20,55
+P004,Black Silk Dress,Silk,"S, M, L",Black,GHI,Women,10,120
+P005,Leather Jacket,Leather,"M, L, XL",Black,JKL,Men,15,250
+P006,Cotton Shorts,Cotton,"S, M, L, XL","Blue, Black",MNO,Unisex,40,30
+P007,Pink Flared Skirt,Chiffon,"S, M, L",Pink,PQR,Women,25,60
+P008,Graphic Print T-Shirt,Cotton,"S, M, L, XL","White, Black",STU,Unisex,35,25
+P009,Tailored Trousers,Polyester,"28, 30, 32, 34","Black, Gray",VWX,Men,45,70
+P010,Maxi Dress,Chiffon,"S, M, L","Blue, White",YZA,Women,20,80
+P011,Knit Sweater,Wool,"S, M, L, XL","Blue, Red",BCD,Unisex,50,50
+P012,Leggings,Spandex,"S, M, L","Black, Gray",EFG,Women,30,35
+P013,Pencil Skirt,Polyester,"S, M, L",Black,HIJ,Women,20,75
+P014,Silk Blouse,Silk,"S, M, L","White, Blue",KLM,Women,25,40
+P015,Jogger Pants,Cotton,"S, M, L, XL","Black, Gray",NOP,Unisex,35,45
+P016,Midi Dress,Silk,"S, M, L","Pink, White",QRS,Women,20,70
+P017,Long Sleeve T-Shirt,Cotton,"S, M, L, XL","Blue, Black",TUV,Unisex,50,30
+P018,Khaki Pants,Khaki,"28, 30, 32, 34","Brown, Blue",WXY,Men,30,50
+P019,Lace Dress,Lace,"S, M, L","Red, Black",ZAB,Women,15,100
+P020,Party Dress,Satin,"S, M, L","Blue, Yellow",CDE,Women,10,150
+P021,Crew Neck T-Shirt,Cotton,"S, M, L, XL","Black, White",FGHI,Unisex,60,20
+P022,Denim Shorts,Denim,"S, M, L, XL","Blue, White",JKLM,Women,40,35
+P023,Bodycon Dress,Polyester,"S, M, L","Red, Black",NOPQ,Women,15,90
+P024,Evening Gown,Satin,"S, M, L","Red, Blue",RSTU,Women,5,200
+P025,Hoodie,Fleece,"S, M, L, XL","Gray, Black",UVWX,Unisex,50,60
+P026,Sweatpants,Cotton,"S, M, L, XL","Gray, Black",YZAB,Unisex,30,50
+P027,Pleated Mini Skirt,Polyester,"S, M, L","Pink, Black",BCDE,Women,20,65
+P028,Wool Long Sleeve Top,Wool,"S, M, L, XL","Gray, Black",DEFG,Unisex,25,70
+P029,Wide Leg Pants,Linen,"S, M, L","White, Gray",FGHI,Women,15,75
+P030,Summer Dress,Cotton,"S, M, L","Yellow, White",HIJK,Women,20,90

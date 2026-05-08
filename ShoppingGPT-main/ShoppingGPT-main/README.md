@@ -1,198 +1,129 @@
-<h1 align="center">ShoppingGPT🌼</h1>
-
-<p align="center">
-  <img src="public/shoppinggpt_logo.png" alt="ShoppingGPT Logo" width="200" height="auto">
-</p>
- 
-ShoppingGPT is an AI-powered intelligent shopping assistant that combines advanced natural language processing techniques to deliver a smart and seamless shopping experience. Built with a focus on performance, scalability, and user experience, ShoppingGPT integrates cutting-edge technologies to revolutionize e-commerce interactions.
-
-## Features ✨
-
-- 🧠 **Large Language Models (LLMs)**: Leverages the power of Google's Gemini model for natural, context-aware conversations.
-- 📚 **RAG (Retrieval-Augmented Generation)**: Enhances responses with relevant product information from SQLite database, ensuring accurate and up-to-date product details.
-- 🛣️ **Semantic Router**: Intelligently routes queries to the appropriate handling mechanism using advanced embedding techniques.
-- 🔍 **Advanced Product Search**: Utilizes case-insensitive and partial matching capabilities, powered by efficient SQLite queries and indexing.
-- 💬 **Intelligent Chatbot Interface**: User-friendly chat interface designed for intuitive product queries and personalized recommendations.
-
-
-## System Architecture
-
-ShoppingGPT employs a modular, scalable architecture:
-
-1. **User Interface (Flask Web App)**
-   - Handles user input and displays responses
-
-2. **Semantic Router**
-   - Utilizes GoogleGenerativeAIEmbeddings
-   - Classifies and routes user queries to appropriate handlers
-
-3. **Query Handlers**
-   a. **Chitchat Chain**
-      - Manages general conversation
-      - Leverages LLM (Gemini-1.5-flash) and ConversationBufferMemory
-   
-   b. **Shopping Agent**
-      - Processes product-related queries
-      - Employs various tools:
-        - Product Search Tool (SQLite-based)
-        - Policy Search Tool (FAISS-based)
-
-4. **Data Storage**
-   - SQLite database for product information
-   - FAISS vector store for policy information
-
-5. **External Services**
-   - Google Generative AI API for LLM and embeddings
-
-This architecture enables efficient query routing, context-aware responses, and seamless integration of product and policy information into the conversation flow.
-
-
-### Key Components
-
-- **RAG System**: Combines FAISS vector store for policy information and SQLite for product data, ensuring fast and relevant information retrieval.
-- **LLM Integration**: Utilizes `ChatGoogleGenerativeAI` with the Gemini-1.5-flash model to generate human-like responses.
-- **Product Search**: Implements a robust `ProductDataLoader` class for efficient SQLite query execution and result formatting.
-- **Policy Search**: Uses FAISS for fast similarity search on company policies and guidelines.
-
-## Advanced Routing and Classification 🧭
-
-ShoppingGPT utilizes advanced routing and classification techniques to enhance its performance:
-
-1. **Semantic Router**: We implement the [Semantic Router](https://github.com/aurelio-labs/semantic-router) library for efficient query routing. This allows for superfast decision-making and intelligent processing of multi-modal data.
-
-2. **Cosine Similarity**: The system employs cosine similarity algorithm to measure the semantic similarity between user queries and predefined routes, ensuring accurate classification and routing.
-
-3. **Custom Hugging Face Model**: We use a fine-tuned Hugging Face model specifically trained for classifying text as either chitchat or product-related. This model enhances the accuracy of query classification.
-
-## Model 🧠
-
-The text classification model used in this project is available on Hugging Face:
-
-[hang1704/opendaisy](https://huggingface.co/hang1704/opendaisy)
-
-This model is used for classifying user queries and enhancing the overall performance of ShoppingGPT. Feel free to explore and use it in your own projects!
-
-
-## Data Structure 🗂️
-
-Product data is stored in SQLite and includes the following fields:
-
-- `product_code`: Unique identifier (TEXT)
-- `product_name`: Name of the product (TEXT)
-- `material`: Material composition (TEXT)
-- `size`: Available sizes (TEXT)
-- `color`: Available colors (TEXT)
-- `brand`: Manufacturer or seller (TEXT)
-- `gender`: Target gender (TEXT)
-- `stock_quantity`: Quantity in stock (INTEGER)
-- `price`: Product price (REAL)
-
-## Installation 🛠️
-
-To set up ShoppingGPT:
-
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/ShoppingGPT.git
-    cd ShoppingGPT
-    ```
-
-2. **Create and activate a virtual environment**:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
-
-3. **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. **Configure environment**:
-   Create a `.env` file in the root directory:
-   ```
-   GOOGLE_API_KEY=your_google_api_key
-   ```
-
-5. **Initialize the database**:
-    ```bash
-    python scripts/init_db.py
-    ```
-
-## Usage 🖥️
-
-To start ShoppingGPT:
-
-1. **Run the Flask application**:
-   ```bash
-   python app.py
-   ```
-
-2. **Access the chatbot**:
-   Open your web browser and navigate to `http://localhost:5000`.
-
-3. **Interact with ShoppingGPT**:
-   - Ask about products: "What red shirts do you have in stock?"
-   - Inquire about policies: "What's your return policy?"
-   - General chat: "How's the weather today?"
-
-## Project Showcase 📸
-
-![ShoppingGPT Interface](public/interface.png)
-*Our user-friendly chat interface*
-
-
-![Product Search Demo](public/product_search.png)
-*Example of product search results*
-
-
-![Chitchat Example](public/chitchat_example.png)
-*Friendly conversation with our AI assistant*
-
-
-These images showcase the key aspects of our ShoppingGPT project. From the intuitive chat interface to the powerful product search and easy access to policy information, our AI assistant is designed to enhance your shopping experience! 🛍️🤖
-
-## Customization 🛠️
-
-To customize ShoppingGPT for your specific needs:
-
-1. **Update product database**: Modify `data/products.db` with your inventory.
-2. **Adjust policies**: Edit `data/policy.txt` with your company's guidelines.
-3. **Fine-tune responses**: Modify prompt templates in `shoppinggpt/tool/product_search.py` and `shoppinggpt/tool/policy_search.py`.
-
-## Troubleshooting 🔍
-
-If you encounter any issues:
-
-1. Ensure all environment variables are correctly set.
-2. Check the console for any error messages.
-3. Verify that the database and policy files are in the correct locations.
-4. Make sure all required dependencies are installed correctly.
-5. Confirm that you're using a compatible Python version (3.7+).
-
-For more detailed information, please refer to the documentation or open an issue on the GitHub repository.
-
-## Contributing 🤝
-
-We welcome contributions to ShoppingGPT! Here's how you can help:
-
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/AmazingFeature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-5. Push to the branch (`git push origin feature/AmazingFeature`)
-6. Open a Pull Request
-
-Please make sure to update tests as appropriate and adhere to the project's coding standards.
-
-
-## License 📄
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments 👏
-
-- Thanks to all contributors who have helped shape ShoppingGPT
-- Special thanks to the open-source community for providing amazing tools and libraries
-
-Happy shopping with ShoppingGPT! 🛍️🤖
+# ShoppingGPT
+
+An AI personal-shopper for an online fashion store. Built on **OpenAI** + **LangChain** + **Flask**, with a custom multi-intent semantic router, SQLite product catalogue, FAISS-backed policy search, and a modern dark/light chat UI that renders real product cards.
+
+> v2 rewrite — switched from Gemini → OpenAI, replaced the legacy storefront template with a custom UI, added multi-intent routing, structured product responses, per-session memory, and safer tool execution.
+
+## Features
+
+- **Multi-intent semantic router** — classifies queries as `products`, `policy`, `recommend`, or `chitchat` using OpenAI embeddings and cosine similarity over curated example utterances. Falls back gracefully when scores are ambiguous.
+- **Tool-calling agent** — uses the right tool per intent: catalogue lookup, policy retrieval, or grounded outfit recommendation.
+- **Guarded SQL** — the agent's product tool only generates `SELECT` queries; an allow-list refuses `INSERT`/`UPDATE`/`DELETE`/`DROP`/`PRAGMA`/etc., even if the LLM is jailbroken.
+- **Grounded recommendations** — the stylist tool reads the live catalogue before suggesting outfits, so it never hallucinates products that don't exist.
+- **English-only** — clean, consistent product catalogue and policy doc; agent always replies in English.
+- **Per-session memory** — each browser session keeps its own conversation history; reset with one click.
+- **Modern UI** — custom CSS design system with dark/light themes, animated message bubbles, product cards rendered from agent output, voice input, typing indicator, suggestion chips. No Bootstrap, no template fluff.
+- **Production-ready Flask** — JSON API, structured logging, request validation, health probe, configurable via `.env`.
+
+## Architecture
+
+```
+                 ┌─────────────┐
+   user msg ────▶│  /api/chat  │────▶ SemanticRouter (OpenAI embeddings, cosine)
+                 └─────┬───────┘                │
+                       │                        ▼
+                       │             ┌──────────────────────┐
+                       │             │ products / policy /  │
+                       │             │ recommend            │
+                       │             └─────────┬────────────┘
+                       │                       ▼
+                       │             ShoppingAgent (tool-calling)
+                       │             ├─ product_search_tool  (SQLite, guarded SQL)
+                       │             ├─ policy_search_tool   (FAISS over policy.txt)
+                       │             └─ outfit_recommendation_tool (grounded LLM)
+                       │
+                       └─ chitchat ─▶ ChitChat chain (mirror language, fashion bias)
+
+       reply  ◀── extract [P###] codes ── attach product cards from SQLite
+```
+
+## Quick start
+
+```bash
+git clone <this-repo>
+cd ShoppingGPT-main
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# macOS/Linux
+source .venv/bin/activate
+
+pip install -r requirements.txt
+
+cp .env.example .env
+# edit .env and set OPENAI_API_KEY=sk-...
+
+python scripts/init_db.py     # build SQLite catalogue from products.csv
+python app.py                 # launch on http://localhost:5000
+```
+
+The first time the policy tool runs, it builds a FAISS index from `data/policy.txt` and caches it in `data/datastore/`.
+
+## API
+
+| Method | Path           | Body / Query                  | Returns                                                       |
+|-------:|----------------|-------------------------------|---------------------------------------------------------------|
+| `GET`  | `/`            | —                             | Chat UI                                                       |
+| `POST` | `/api/chat`    | `{ "message": "..." }`        | `{ reply, route, products[], session_id, elapsed_ms }`        |
+| `GET`  | `/api/history` | —                             | `{ session_id, messages: [{role, content}, ...] }`            |
+| `POST` | `/api/reset`   | —                             | `{ ok: true }`                                                |
+| `GET`  | `/api/health`  | —                             | `{ status, app, sessions }`                                   |
+
+The `products` array contains structured rows pulled from SQLite for any product codes (`P001`, `P002`, …) the agent mentions in its reply, ready for the frontend to render as cards.
+
+## Configuration
+
+All configuration is environment-driven (see `.env.example`):
+
+| Variable                 | Default                  | Notes                                           |
+|--------------------------|--------------------------|-------------------------------------------------|
+| `OPENAI_API_KEY`         | —                        | **Required**                                    |
+| `OPENAI_CHAT_MODEL`      | `gpt-4o-mini`            | Any chat model the SDK accepts                  |
+| `OPENAI_EMBEDDING_MODEL` | `text-embedding-3-small` | Used for routing + policy index                 |
+| `OPENAI_TEMPERATURE`     | `0.2`                    | Lower = more deterministic                      |
+| `FLASK_SECRET_KEY`       | random                   | Set this in production                          |
+| `PORT`                   | `5000`                   |                                                 |
+| `APP_NAME`               | `ShoppingGPT`            | Shown in the UI header                          |
+
+## Project layout
+
+```
+ShoppingGPT-main/
+├─ app.py                       # Flask backend, JSON API, sessions
+├─ main.py                      # CLI entry point
+├─ scripts/init_db.py           # build SQLite from products.csv
+├─ shoppinggpt/
+│  ├─ config.py                 # env, paths, OpenAI factories
+│  ├─ agent.py                  # tool-calling shopping agent
+│  ├─ chain.py                  # chitchat chain
+│  ├─ router/router.py          # multi-intent semantic router
+│  └─ tool/
+│     ├─ product_search.py      # NL → guarded SELECT against SQLite
+│     ├─ policy_search.py       # FAISS similarity over policy.txt
+│     ├─ recommend.py           # outfit suggestions grounded in inventory
+│     └─ catalogue.py           # parameterised helpers used by the API
+├─ static/                      # style.css + app.js (vanilla, no framework)
+├─ templates/index.html         # single-page chat UI
+└─ data/
+   ├─ products.csv              # canonical catalogue source
+   ├─ products.db               # SQLite (regenerated by init_db.py)
+   ├─ policy.txt                # company policies — embedded into FAISS
+   └─ datastore/                # cached FAISS index (built on first run)
+```
+
+## Adapting it to your own store
+
+1. Replace `data/products.csv` with your catalogue (keep the column names) and run `python scripts/init_db.py`.
+2. Replace `data/policy.txt` with your store policies and delete `data/datastore/` so the index rebuilds.
+3. (Optional) Edit the example utterances in `shoppinggpt/router/router.py` so they match your domain language.
+4. (Optional) Tweak the agent's tone in `shoppinggpt/agent.py` (`SYSTEM_PROMPT`).
+
+## Safety notes
+
+- The `product_search_tool` enforces a `SELECT`-only allow-list and rejects any other SQL keyword — even if the model produces destructive output.
+- Per-session memory lives in process memory only; deploy behind a session-aware proxy (or move memory to Redis) if you run multiple workers.
+- API responses include `elapsed_ms` and a server-side `session_id` you can use for tracing.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
