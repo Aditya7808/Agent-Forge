@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shoppinggpt",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["ShoppingGPT-main/ShoppingGPT-main/app.py"],
+      "port": 5000
+    }
+  ]
+}
