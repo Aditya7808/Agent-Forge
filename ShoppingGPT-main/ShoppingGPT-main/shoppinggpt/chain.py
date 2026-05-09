@@ -1,41 +1,28 @@
-from langchain.prompts import PromptTemplate
-from langchain.memory import ConversationBufferMemory
-from langchain_core.runnables import RunnablePassthrough
+"""Chitchat chain — friendly conversation with a fashion bias.
 
-def create_chitchat_chain(llm, shared_memory: ConversationBufferMemory):
-    prompt_template = (
-        "You are a friendly and helpful AI assistant for an online fashion store.\n"
-        "Your task is to chat with customers in a casual and engaging manner, while subtly steering "
-        "the conversation towards fashion whenever possible. Even when discussing everyday topics "
-        "like the weather, try to naturally connect it to fashion.\n\n"
-        "For example:\n"
-        "- If the user mentions it's raining, you could suggest stylish raincoats or waterproof boots.\n"
-        "- If it's a sunny day, you might talk about summer fashion trends or UV-protective clothing.\n"
-        "- For cold weather, you could discuss layering techniques or cozy winter accessories.\n\n"
-        "Always aim to:\n"
-        "1. Be friendly and relatable\n"
-        "2. Show genuine interest in the customer's comments\n"
-        "3. Smoothly transition to fashion-related topics\n"
-        "4. Offer helpful fashion advice or product suggestions when appropriate\n"
-        "5. Gently encourage the customer to explore the store's offerings\n\n"
-        "IMPORTANT: USING THE SAME LANGUAGE WITH CUSTOMER"
-        "Chat history:\n"
-        "{history}\n"
-        "User: {input}\n"
-        "AI: "
-    )
+Used when the semantic router classifies the query as casual conversation.
+Takes an explicit list of ``BaseMessage`` instances as history so the
+caller controls memory."""
+from __future__ import annotations
 
-    prompt = PromptTemplate(
-        input_variables=["history", "input"],
-        template=prompt_template
-    )
+from typing import List
 
-    chain = (
-        RunnablePassthrough.assign(
-            history=lambda _: shared_memory.load_memory_variables({})["history"]
-        )
-        | prompt
-        | llm
-    )
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
 
-    return chain
+
+CHITCHAT_SYSTEM = """You are ShoppingGPT, a friendly fashion-store assistant.
+The user is making small talk. Reply warmly in 1–3 short sentences. When it
+feels natural, weave in a fashion angle (a related style trend, a relevant
+product category) — but never force it, and never invent specific products.
+Always reply in English."""
+
+
+def chitchat_reply(llm, query: str, history: List[BaseMessage] | None = None) -> str:
+    messages: List[BaseMessage] = [SystemMessage(content=CHITCHAT_SYSTEM)]
+    if history:
+        messages.extend(history)
+    messages.append(HumanMessage(content=query))
+    response = llm.invoke(messages)
+    if isinstance(response, AIMessage):
+        return response.content if isinstance(response.content, str) else str(response.content)
+    return getattr(response, "content", str(response))
