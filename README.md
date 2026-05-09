@@ -174,20 +174,20 @@
 
 <div align="center">
 
-### 🏆 Current Status: **16 Agents Forged — And Counting!**
+### 🏆 Current Status: **17 Agents Forged — And Counting!**
 
 ```
-Progress: ██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░ 16+ (No finish line)
+Progress: ████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░ 17+ (No finish line)
 ```
 
 | Metric                     | Value   |
 | -------------------------- | ------- |
-| 🤖 **Agents Built**        | 16      |
-| 📝 **Lines of Code**       | 27,000+ |
-| 🌟 **Tech Stacks**         | 14      |
+| 🤖 **Agents Built**        | 17      |
+| 📝 **Lines of Code**       | 28,000+ |
+| 🌟 **Tech Stacks**         | 15      |
 | 📚 **Frameworks**          | 11      |
-| 🔗 **Integrations**        | 18      |
-| 📖 **Documentation Pages** | 40+     |
+| 🔗 **Integrations**        | 19      |
+| 📖 **Documentation Pages** | 42+     |
 
 </div>
 
@@ -215,6 +215,7 @@ Progress: ███████████████████████�
 | 14  | [🎨 **UI/UX Feedback Agent Team**](./16_UI_UX%20Feedback%20Agent_Nano_banana) | 5-specialist multi-agent design crew — critic, strategist, implementer, A11y auditor, CRO optimizer + Streamlit UI | Google ADK, Gemini 2.5 Flash, Nano Banana, Streamlit | ⭐⭐⭐⭐ | [▶️](./16_UI_UX%20Feedback%20Agent_Nano_banana) |
 | 15  | [📜 **ClauseAI — Contract Analysis**](./Contract%20Analysis) | Industry-grade multi-agent contract review — 7 parallel specialists for risk scoring, missing-clause detection, conflict detection, GDPR/CCPA/HIPAA/SOX compliance, PII flagging, redlined DOCX export & grounded Q&A chat | LangGraph, OpenAI (4o + 4o-mini), FAISS, Pydantic, Streamlit | ⭐⭐⭐⭐ | [▶️](./Contract%20Analysis/streamlit_app) |
 | 16  | [🏠 **AI Real Estate Agent Team**](./AI%20Real%20Estate%20Agent%20Team) | Multi-agent property search across Zillow/Realtor/Trulia/Homes — deterministic 0–100 investment scoring, 6-chart Plotly analytics dashboard, Firecrawl cache, SQLite search history, Markdown/JSON/CSV exports, pluggable LLM (Gemini · OpenAI · Anthropic · Ollama) | Agno, Firecrawl, Pydantic, Plotly, SQLite, Streamlit | ⭐⭐⭐⭐ | [▶️](./AI%20Real%20Estate%20Agent%20Team) |
+| 17  | [🛍️ **ShoppingGPT**](./ShoppingGPT-main) | AI personal-shopper for an online fashion store — multi-intent semantic router (products · policy · recommend · chitchat), guarded SELECT-only SQL tool, FAISS policy retrieval, grounded outfit recommender, per-session memory, custom dark/light chat UI with product cards | OpenAI, LangChain, Flask, FAISS, SQLite | ⭐⭐⭐ | [▶️](./ShoppingGPT-main) |
 
 ### 📈 Difficulty Legend
 
@@ -241,7 +242,6 @@ Progress: ███████████████████████�
 | 20  | 🎨 **Content Creator**    | Blog posts, social media content generation       | OpenAI, Stability AI              |   ⏳   |
 | 21  | 💰 **Finance Tracker**    | Expense categorization & budget planning          | Plaid API, OpenAI                 |   ⏳   |
 | 22  | 🏥 **Health Assistant**   | Symptom checker & wellness recommendations        | Medical APIs, Safety filters      |   ⏳   |
-| 23  | 🛒 **Shopping Agent**     | Price comparison & recommendation engine          | Web scraping, RAG                 |   ⏳   |
 | 24+ | 🔜 **More Agents...**     | The forge never stops — new agents whenever ready | Multiple                          |   ⏳   |
 
 ### 🗓️ Future Planned Categories
@@ -605,6 +605,20 @@ agent-forge/
 │   ├── .env.example · pyrightconfig.json
 │   └── README.md                        # Full documentation
 │
+├── 📁 ShoppingGPT-main/                  # 🆕 AI personal-shopper for fashion store
+│   └── ShoppingGPT-main/
+│       ├── app.py                        # Flask backend, JSON API, sessions
+│       ├── main.py                       # CLI entry point
+│       ├── scripts/init_db.py            # Build SQLite from products.csv
+│       ├── shoppinggpt/
+│       │   ├── config.py                 # Env, paths, OpenAI factories
+│       │   ├── agent.py                  # Tool-calling shopping agent
+│       │   ├── chain.py                  # Chitchat chain
+│       │   ├── router/router.py          # Multi-intent semantic router
+│       │   └── tool/                     # product_search · policy_search · recommend · catalogue
+│       ├── static/ · templates/          # Custom CSS + vanilla JS chat UI
+│       └── data/                         # products.csv · products.db · policy.txt · FAISS cache
+│
 ├── 📁 .github/
 │   ├── ISSUE_TEMPLATE/           # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md  # PR template
@@ -633,6 +647,7 @@ agent-forge/
 - [x] Add UI/UX Feedback Agent Team — 5-specialist design crew
 - [x] Add ClauseAI — industry-grade multi-agent contract review (LangGraph + OpenAI)
 - [x] Add AI Real Estate Agent Team — multi-source listings, deterministic scoring, full analytics dashboard
+- [x] Add ShoppingGPT — AI personal-shopper with multi-intent routing, guarded SQL, grounded recommendations
 - [x] Rebrand to **Agent Forge** — open-ended, no-deadline collection
 - [x] Comprehensive documentation
 - [x] Contributor guidelines
