@@ -40,16 +40,35 @@
   function renderEmpty() {
     messagesEl.innerHTML = `
       <div class="empty">
-        <h2>What are we shopping for today?</h2>
-        <p>Ask about a specific item, browse by color or size, get styling advice, or check store policies.</p>
-        <div class="empty__chips">
-          <button class="chip" data-prompt="Show me white cotton shirts">White cotton shirts</button>
-          <button class="chip" data-prompt="Recommend a winter outfit">Winter outfit</button>
-          <button class="chip" data-prompt="What's your return policy?">Return policy</button>
-          <button class="chip" data-prompt="Find me a leather jacket in size L">Leather jacket, size L</button>
+        <div class="empty__hero">
+          <span class="empty__kicker">Ready when you are</span>
+          <h2>What are you in the mood for?</h2>
+          <p>Search the catalogue, pull up a policy, or describe an occasion and I'll style the look.</p>
+        </div>
+        <div class="empty__grid">
+          <button class="suggestion" data-prompt="Show me white cotton shirts under $40">
+            <span class="suggestion__tag">Catalogue</span>
+            <span class="suggestion__title">White cotton shirts under $40</span>
+            <span class="suggestion__hint">filter by color, fabric, price</span>
+          </button>
+          <button class="suggestion" data-prompt="Recommend a winter outfit under $200">
+            <span class="suggestion__tag">Stylist</span>
+            <span class="suggestion__title">A winter outfit under $200</span>
+            <span class="suggestion__hint">complete looks, occasion-led</span>
+          </button>
+          <button class="suggestion" data-prompt="What is your return policy?">
+            <span class="suggestion__tag">Policy</span>
+            <span class="suggestion__title">Return &amp; exchange policy</span>
+            <span class="suggestion__hint">windows, conditions, refunds</span>
+          </button>
+          <button class="suggestion" data-prompt="Find me a leather jacket in size L">
+            <span class="suggestion__tag">Catalogue</span>
+            <span class="suggestion__title">Leather jacket, size L</span>
+            <span class="suggestion__hint">stock, sizes, alternatives</span>
+          </button>
         </div>
       </div>`;
-    messagesEl.querySelectorAll(".chip").forEach((c) =>
+    messagesEl.querySelectorAll(".suggestion").forEach((c) =>
       c.addEventListener("click", () => sendMessage(c.dataset.prompt))
     );
   }
@@ -147,8 +166,34 @@
     return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   }
 
+  // Track whether the user has scrolled away from the bottom. If they have,
+  // we don't yank them back when new content arrives — only stay pinned when
+  // they were already at (or near) the bottom.
+  let stickToBottom = true;
+  const NEAR_BOTTOM_PX = 80;
+
+  function isNearBottom() {
+    const dist = messagesEl.scrollHeight - messagesEl.scrollTop - messagesEl.clientHeight;
+    return dist <= NEAR_BOTTOM_PX;
+  }
+
+  messagesEl.addEventListener("scroll", () => {
+    stickToBottom = isNearBottom();
+  });
+
+  function scrollToBottom(smooth = true) {
+    // rAF ensures we measure after layout (images, product cards, fonts).
+    requestAnimationFrame(() => {
+      messagesEl.scrollTo({
+        top: messagesEl.scrollHeight,
+        behavior: smooth ? "smooth" : "auto",
+      });
+    });
+  }
+
   function appendMessage({ role, content, route, products }) {
     if (messagesEl.querySelector(".empty")) messagesEl.innerHTML = "";
+    const wasPinned = stickToBottom || role === "user";
     const node = msgTpl.content.firstElementChild.cloneNode(true);
     node.classList.add(`msg--${role}`);
     node.querySelector(".msg__role").textContent =
@@ -170,11 +215,15 @@
       products.forEach((p) => wrap.appendChild(renderCard(p)));
     }
     messagesEl.appendChild(node);
-    node.scrollIntoView({ behavior: "smooth", block: "end" });
+    if (wasPinned) {
+      stickToBottom = true;
+      scrollToBottom();
+    }
     return node;
   }
 
   function appendTyping() {
+    const wasPinned = stickToBottom;
     const node = msgTpl.content.firstElementChild.cloneNode(true);
     node.classList.add("msg--assistant", "msg--typing");
     node.querySelector(".msg__role").textContent = "ShoppingGPT";
@@ -182,7 +231,7 @@
     node.querySelector(".msg__content").innerHTML =
       '<span class="typing"><span></span><span></span><span></span></span>';
     messagesEl.appendChild(node);
-    node.scrollIntoView({ behavior: "smooth", block: "end" });
+    if (wasPinned) scrollToBottom();
     return node;
   }
 
