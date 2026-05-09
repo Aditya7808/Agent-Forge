@@ -5,7 +5,15 @@
       "Bash(python -c \"import ddgs; print\\(''ddgs ok''\\)\")",
       "Bash(\"/d/100-Days-100-AI-AGENTS/.venv/Scripts/python.exe\" -c \"import ddgs; print\\(''ok''\\)\")",
       "Bash(\"/d/100-Days-100-AI-AGENTS/.venv/Scripts/pip.exe\" show:*)",
-      "Bash(\"/d/100-Days-100-AI-AGENTS/.venv/Scripts/streamlit.exe\" run:*)"
+      "Bash(\"/d/100-Days-100-AI-AGENTS/.venv/Scripts/streamlit.exe\" run:*)",
+      "Bash(cd /d D:\\\\100-Days-100-AI-AGENTS\\\\ShoppingGPT-main)",
+      "Bash(Get-ChildItem -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(ConvertTo-Csv -NoTypeInformation)",
+      "Bash(Out-String)",
+      "Bash(find /d/100-Days-100-AI-AGENTS/ShoppingGPT-main -type f | head -100)",
+      "Bash(sqlite3 /d/100-Days-100-AI-AGENTS/ShoppingGPT-main/ShoppingGPT-main/data/products.db \".schema\")",
+      "Bash(sqlite3 /d/100-Days-100-AI-AGENTS/ShoppingGPT-main/ShoppingGPT-main/data/products.db \"SELECT COUNT\\(*\\) FROM products;\")"
     ]
   }
 }

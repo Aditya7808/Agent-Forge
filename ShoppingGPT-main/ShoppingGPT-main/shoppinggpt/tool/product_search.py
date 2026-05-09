@@ -1,9 +1,9 @@
 import sqlite3
 from typing import Union, List, Dict
 
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
-from langchain.tools import tool
+from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 
 from shoppinggpt.config import OPENAI_API_KEY, DATA_PRODUCT_PATH

@@ -1,5 +1,4 @@
-from langchain.prompts import PromptTemplate
-from langchain.memory import ConversationBufferWindowMemory
+from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 
 CHITCHAT_TEMPLATE = """You are ShoppingGPT, a friendly and helpful AI assistant for a Vietnamese fashion store.

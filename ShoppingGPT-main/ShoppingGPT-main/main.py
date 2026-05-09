@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from langchain.memory import ConversationBufferWindowMemory
+from langchain.memory import ConversationBufferWindowMemory  # noqa
 from shoppinggpt.router.lib_semantic_router import (
     SemanticRouter,
     PRODUCT_ROUTE_NAME,

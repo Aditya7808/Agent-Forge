@@ -1,6 +1,5 @@
 from langchain.agents import AgentExecutor, create_tool_calling_agent
-from langchain.memory import ConversationBufferWindowMemory
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from shoppinggpt.tool.product_search import product_search_tool
 from shoppinggpt.tool.policy_search import policy_search_tool
 

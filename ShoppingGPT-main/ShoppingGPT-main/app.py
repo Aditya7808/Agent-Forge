@@ -35,7 +35,10 @@ def _get_llm():
 def _get_memory():
     global _memory
     if _memory is None:
-        from langchain.memory import ConversationBufferWindowMemory
+        try:
+            from langchain.memory import ConversationBufferWindowMemory
+        except ImportError:
+            from langchain_community.memory.chat_memory import ConversationBufferWindowMemory  # type: ignore
         _memory = ConversationBufferWindowMemory(
             return_messages=True,
             memory_key="chat_history",
