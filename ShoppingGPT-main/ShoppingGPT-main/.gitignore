@@ -1,6 +1,20 @@
-__pycache__
+__pycache__/
+*.py[cod]
 .env
-models/opendaisy/
+.env.local
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store
+
+# Build artefacts and caches
+data/datastore/
 *.bin
 *.pt
 *.pth
+models/opendaisy/
+
+# OS / editor
+*.swp
+Thumbs.db
