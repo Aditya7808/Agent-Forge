@@ -1,37 +1,72 @@
 <div align="center">
 
-# Audio-In-Chat
+# 🎧 Audio-In-Chat
 
-### Talk to your audio — production-grade transcription + RAG, in one library
+### Talk to your audio — industry-grade transcription + RAG, in one library
 
-[![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-API-412991?logo=openai&logoColor=white)](https://platform.openai.com/)
-[![Qdrant](https://img.shields.io/badge/Qdrant-Vector_DB-DC382D)](https://qdrant.tech/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-UI-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![License](https://img.shields.io/badge/license-Apache_2.0-green)](../LICENSE)
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/OpenAI-Whisper_+_GPT--4o-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI"/>
+  <img src="https://img.shields.io/badge/Qdrant-Vector_DB-DC382D?style=flat-square" alt="Qdrant"/>
+  <img src="https://img.shields.io/badge/Streamlit-UI-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit"/>
+  <img src="https://img.shields.io/badge/FastAPI-Server-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI"/>
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
+  <img src="https://img.shields.io/badge/license-Apache_2.0-green?style=flat-square" alt="License"/>
+</p>
+
+<em>Drop a meeting · podcast · lecture · voice note → ask anything · get grounded answers with citations</em>
 
 </div>
 
-Upload a meeting, podcast, lecture, or voice note → get a chat interface that
-answers grounded in the transcript with optional source citations.
+---
 
-Part of the [Agent Forge](https://github.com/ayusingh-54/agent-forge) collection.
+Part of the [🔨 Agent Forge](../README.md) collection.
+
+> Upload any audio file → it gets transcribed with **OpenAI Whisper** (or AssemblyAI for speaker diarization), chunked, embedded with **`text-embedding-3-small`**, stored in **Qdrant**, and made queryable through a streaming **GPT-4o** chat — all behind a single `AudioChatPipeline` class you can drop into any Python app.
+
+📺 See [`demo.mp4`](demo.mp4) for a walkthrough of the UI.
 
 ---
 
-## Highlights
+## 🌟 Highlights
 
-- **OpenAI-first**: GPT-4o-mini / GPT-4o chat + `text-embedding-3-*` embeddings + Whisper, out of the box.
-- **Pluggable**: swap embedders (OpenAI ↔ HuggingFace), transcribers (Whisper ↔ AssemblyAI), and vector stores (in-memory ↔ self-hosted Qdrant ↔ Qdrant Cloud).
-- **Zero-config demo mode**: `QDRANT_URL=:memory:` runs end-to-end without any infra.
-- **Library-first design**: import `AudioChatPipeline` and integrate in any Python app — no Streamlit lock-in.
-- **Streaming chat**: token-by-token UI updates and HTTP streaming via the FastAPI example.
-- **Citations**: every answer can be expanded to show the retrieved source passages.
-- **Production hygiene**: typed dataclasses, custom exception hierarchy, structured logging, input validation, configurable upload limits, Dockerfile + compose.
+| | |
+|---|---|
+| 🟢 **OpenAI-first** | GPT-4o-mini / GPT-4o chat · `text-embedding-3-*` · Whisper — out of the box |
+| 🔌 **Pluggable** | Swap embedders (OpenAI ↔ HuggingFace), transcribers (Whisper ↔ AssemblyAI), and vector stores (in-memory ↔ self-hosted Qdrant ↔ Qdrant Cloud) without code changes |
+| ⚡ **Zero-config demo** | Default `QDRANT_URL=:memory:` runs the entire stack with no extra infra — only `OPENAI_API_KEY` required |
+| 📚 **Library-first** | `from audio_chat import AudioChatPipeline` and integrate into any Python app — Streamlit is just *one* UI |
+| 💬 **Streaming chat** | Token-by-token UI updates and HTTP streaming via the FastAPI example |
+| 🔍 **Citations** | Every answer can expand to show the source passages with similarity scores |
+| 🛡️ **Production hygiene** | Custom exception hierarchy · structured logging · config validation · upload limits · Dockerfile + compose |
+| 🧪 **Tested** | Offline-runnable pytest suite (config + chunker), zero API keys required |
 
 ---
 
-## Architecture
+## 🎬 Quick demo
+
+```python
+from audio_chat import AudioChatPipeline
+
+pipe = AudioChatPipeline.from_env()           # reads .env → OPENAI_API_KEY
+pipe.ingest_audio("meeting.mp3")              # transcribe → chunk → embed → index
+
+for token in pipe.stream_query("What were the action items?"):
+    print(token, end="", flush=True)
+```
+
+Or with citations:
+
+```python
+result = pipe.query_with_sources("Who proposed the deadline?")
+print(result["answer"])
+for src in result["sources"]:
+    print(f"[score={src['score']:.3f}] {src['text'][:120]}...")
+```
+
+---
+
+## 🏗️ Architecture
 
 ```
 ┌──────────────┐  audio   ┌────────────────┐ segments ┌─────────────┐ vectors ┌──────────┐
@@ -59,107 +94,94 @@ Part of the [Agent Forge](https://github.com/ayusingh-54/agent-forge) collection
 
 ---
 
-## Project layout
+## 📂 Project layout
 
 ```
 Audio-In-Chat/
-├── app.py                       # Streamlit UI
+├── app.py                       # Streamlit UI (load_dotenv → sidebar pre-populated)
 ├── code_rag.py                  # Backwards-compat shim (old import paths)
 ├── requirements.txt
-├── pyproject.toml
-├── Dockerfile
-├── docker-compose.yml           # Streamlit + Qdrant stack
-├── .env.example
+├── pyproject.toml               # Publishable package, optional extras
+├── Dockerfile                   # python:3.11-slim + ffmpeg + healthcheck
+├── docker-compose.yml           # Streamlit + persistent Qdrant
+├── .env.example                 # All ~25 env vars documented
+├── demo.mp4                     # UI walkthrough
 ├── audio_chat/                  # ← the importable library
-│   ├── __init__.py
-│   ├── config.py
-│   ├── exceptions.py
-│   ├── logger.py
-│   ├── embeddings.py
-│   ├── transcriber.py
-│   ├── chunking.py
-│   ├── vector_store.py
-│   ├── llm.py
-│   ├── rag.py
-│   └── pipeline.py
+│   ├── __init__.py              # Public API (AudioChatPipeline, Settings, exceptions)
+│   ├── config.py                # Env-driven Settings dataclass + .validate()
+│   ├── exceptions.py            # AudioChatError hierarchy
+│   ├── logger.py                # Structured logger (JSON or human)
+│   ├── embeddings.py            # OpenAIEmbedder · HuggingFaceEmbedder
+│   ├── transcriber.py           # OpenAITranscriber · AssemblyAITranscriber + file validation
+│   ├── chunking.py              # Speaker-aware overlapping chunker
+│   ├── vector_store.py          # QdrantStore (memory / self-hosted / cloud)
+│   ├── llm.py                   # OpenAI chat — streaming-first
+│   ├── rag.py                   # Retrieval + prompt building + sources
+│   └── pipeline.py              # AudioChatPipeline facade
 ├── examples/
 │   ├── basic_usage.py           # CLI: transcribe + answer one question
-│   └── api_server.py            # FastAPI streaming endpoints
+│   └── api_server.py            # FastAPI: /ingest /query (SSE) /reset /stats
 └── tests/
-    ├── test_config.py
-    └── test_chunking.py
+    ├── test_config.py           # 5 tests
+    └── test_chunking.py         # 5 tests
 ```
 
 ---
 
-## Quick start
+## 🚀 Quick start
 
-### 1. Install
+### Option 1 — Streamlit UI (recommended)
+
+```bash
+cd Audio-In-Chat
+pip install -r requirements.txt
+cp .env.example .env             # then edit and set OPENAI_API_KEY=sk-...
+streamlit run app.py             # → http://localhost:8501
+```
+
+The sidebar auto-loads from `.env`. Click **✅ Apply configuration**, drop an audio file, hit **🚀 Transcribe & index**, then ask questions in the chat box.
+
+### Option 2 — Docker (Streamlit + persistent Qdrant)
+
+```bash
+cp .env.example .env             # set OPENAI_API_KEY
+docker compose up --build        # → http://localhost:8501
+```
+
+Compose boots Qdrant on `:6333` with a named volume for persistence and wires the app at `QDRANT_URL=http://qdrant:6333`.
+
+### Option 3 — Library (any Python app)
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configure
-
-```bash
-cp .env.example .env
-# edit .env and set OPENAI_API_KEY=sk-...
+```python
+from audio_chat import AudioChatPipeline
+pipe = AudioChatPipeline.from_env()
+pipe.ingest_audio("meeting.mp3")
+print(pipe.query("Summarize the meeting in 3 bullets."))
 ```
 
-The default config requires **only** `OPENAI_API_KEY` — everything else has safe
-defaults (`QDRANT_URL=:memory:`, GPT-4o-mini chat, `text-embedding-3-small`,
-Whisper transcription).
-
-### 3. Run the Streamlit UI
+### Option 4 — FastAPI server
 
 ```bash
-streamlit run app.py
+pip install fastapi "uvicorn[standard]" python-multipart
+uvicorn examples.api_server:app --reload --port 8000
 ```
 
-Then in the browser:
-
-1. Paste your OpenAI key in the sidebar (or rely on the `.env`).
-2. Click **Apply configuration**.
-3. Upload an audio file and click **Transcribe & index**.
-4. Ask questions in the chat box.
-
-### Docker (Streamlit + persistent Qdrant)
-
-```bash
-cp .env.example .env   # set OPENAI_API_KEY
-docker compose up --build
-# → http://localhost:8501
-```
-
-The compose file boots Qdrant on `:6333` (with a named volume for persistence)
-and points the app at it via `QDRANT_URL=http://qdrant:6333`.
+| Method | Path | Body | Returns |
+|---|---|---|---|
+| `POST` | `/ingest` | multipart `file` | `{segments, chunks, indexed}` |
+| `POST` | `/query` | `{"question": "...", "top_k": 5}` | **streamed** text (SSE) |
+| `POST` | `/reset` | — | `{"status": "ok"}` |
+| `GET`  | `/stats` | — | pipeline metadata |
 
 ---
 
-## Use as a library
+## 🔧 Integration recipes
 
-```python
-from audio_chat import AudioChatPipeline
-
-pipeline = AudioChatPipeline.from_env()  # reads OPENAI_API_KEY etc.
-
-# 1. Ingest
-summary = pipeline.ingest_audio("meeting.mp3")
-print(summary)  # {'segments': 42, 'chunks': 11, 'indexed': 11, ...}
-
-# 2. Stream an answer
-for token in pipeline.stream_query("What were the action items?"):
-    print(token, end="", flush=True)
-
-# 3. Get an answer with source citations
-result = pipeline.query_with_sources("Who proposed the deadline?")
-print(result["answer"])
-for src in result["sources"]:
-    print(f"[{src['score']:.3f}] {src['text'][:120]}...")
-```
-
-### Override settings programmatically
+### Use a specific OpenAI model + Qdrant Cloud
 
 ```python
 from audio_chat import AudioChatPipeline, Settings
@@ -167,25 +189,38 @@ from audio_chat import AudioChatPipeline, Settings
 settings = Settings(
     openai_api_key="sk-...",
     llm_model="gpt-4o",
-    transcription_provider="assemblyai",
-    assemblyai_api_key="...",
+    transcription_provider="openai",
+    embedding_model="text-embedding-3-large",
+    embedding_dim=3072,
     qdrant_url="https://xyz.cloud.qdrant.io",
     qdrant_api_key="...",
     qdrant_collection="my_org_meetings",
 )
-pipeline = AudioChatPipeline(settings)
+pipe = AudioChatPipeline(settings)
 ```
 
-Or use kwargs as overrides on top of env:
+### Override env settings inline
 
 ```python
-pipeline = AudioChatPipeline.from_kwargs(llm_model="gpt-4o", retrieval_top_k=8)
+pipe = AudioChatPipeline.from_kwargs(
+    llm_model="gpt-4o",
+    retrieval_top_k=8,
+    chunk_size=1200,
+)
 ```
 
-### Integrate into an existing app
+### Switch transcription to AssemblyAI (for speaker labels)
 
 ```python
-# Bring your own Qdrant client / collection name:
+pipe = AudioChatPipeline.from_kwargs(
+    transcription_provider="assemblyai",
+    assemblyai_api_key="...",
+)
+```
+
+### Bring your own embedder / vector store
+
+```python
 from audio_chat import Settings, AudioChatPipeline
 from audio_chat.vector_store import QdrantStore
 from audio_chat.embeddings import build_embedder
@@ -193,28 +228,12 @@ from audio_chat.embeddings import build_embedder
 settings = Settings.from_env()
 embedder = build_embedder(settings)
 store = QdrantStore(settings, vector_dim=embedder.dim)
-
-pipeline = AudioChatPipeline(settings, embedder=embedder, store=store)
+pipe = AudioChatPipeline(settings, embedder=embedder, store=store)
 ```
-
-### FastAPI server
-
-```bash
-pip install fastapi "uvicorn[standard]" python-multipart
-export OPENAI_API_KEY=sk-...
-uvicorn examples.api_server:app --reload --port 8000
-```
-
-| Method | Path | Body | Returns |
-|---|---|---|---|
-| `POST` | `/ingest` | multipart `file` | `{segments, chunks, indexed}` |
-| `POST` | `/query` | `{"question": "...", "top_k": 5}` | streamed text |
-| `POST` | `/reset` | — | `{"status": "ok"}` |
-| `GET`  | `/stats` | — | pipeline metadata |
 
 ---
 
-## Configuration reference
+## ⚙️ Configuration reference
 
 All settings can be set via env vars (`Settings.from_env()`) or kwargs (`Settings(...)`).
 See [`.env.example`](.env.example) for the complete list. Highlights:
@@ -241,22 +260,25 @@ See [`.env.example`](.env.example) for the complete list. Highlights:
 
 ---
 
-## Why these choices?
+## 🛡️ What makes this "industry-grade"?
 
-- **OpenAI by default** — best general quality / lowest setup friction. The
-  factory pattern (`build_embedder`, `build_transcriber`, `build_llm`) keeps the
-  door open for other providers.
-- **Qdrant** — single backend that gracefully scales from `:memory:` to Qdrant
-  Cloud without code changes.
-- **Cosine distance + normalised vectors** — both OpenAI embeddings and modern
-  HF sentence-transformers ship normalised, so cosine is the safe universal choice.
-- **`query_points`** (not the deprecated `search`) — uses the current Qdrant API.
-- **Char-based chunker** — provider-independent, no tokenizer dependency, fast.
-- **Streaming-first LLM** — better UX in the UI, and trivial to adapt for HTTP SSE.
+| Concern | How it's handled |
+|---|---|
+| **Configuration** | Single env-driven `Settings` dataclass with `.validate()` — fail-fast on missing keys |
+| **Error handling** | Typed exception hierarchy (`AudioChatError` → `ConfigurationError`, `TranscriptionError`, `EmbeddingError`, `VectorStoreError`, `LLMError`) |
+| **Input validation** | File-size cap, extension whitelist, Whisper 25 MB hard-limit surfaced with a clear message |
+| **Observability** | Centralized logger; switch to JSON-line format with `LOG_JSON=true` for ingestion into Datadog/Loki |
+| **Deprecations** | Uses Qdrant's current `query_points` API (not the deprecated `search`) |
+| **Streaming** | First-class streaming for chat — both UI and HTTP API |
+| **Provider lock-in** | Factory pattern (`build_embedder`, `build_transcriber`, `build_llm`) leaves the door open for other providers |
+| **Backwards compat** | Old `code_rag` module still works as a thin shim |
+| **Tests** | Offline pytest suite — config validator + chunker, 10/10 passing |
+| **Reproducible deploy** | Dockerfile with healthcheck + docker-compose with persistent Qdrant volume |
+| **Secrets hygiene** | `.env` git-ignored, `.env.example` checked in |
 
 ---
 
-## Testing
+## 🧪 Testing
 
 ```bash
 pip install pytest
@@ -268,26 +290,36 @@ config validator and the chunker.
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 | Symptom | Fix |
 |---|---|
 | `ConfigurationError: OPENAI_API_KEY is required` | Set the env var or pass it to `Settings(...)`. |
 | `AudioFileTooLargeError` | Whisper has a hard 25 MB limit. Split or compress. Raise `MAX_AUDIO_MB` only after compressing. |
 | `VectorStoreError: ... Connection refused` | Either run `docker compose up qdrant`, or fall back to `QDRANT_URL=:memory:`. |
-| Embeddings dim mismatch on a re-used collection | Drop the collection (UI: **Reset index**, or `pipeline.reset_index()`) when changing embedding models. |
-| Slow first run with HuggingFace embedder | Model is downloaded on first use into `HF_CACHE_DIR`; subsequent runs are fast. |
+| Embeddings-dim mismatch on a re-used collection | Drop the collection (UI → **Reset index**, or `pipeline.reset_index()`) when changing embedding models. |
+| Chat reply is just a `▌` cursor | Almost always a billing/rate-limit issue on the OpenAI key. Check the terminal where Streamlit is running — the exception will be there. The model name (e.g. `gpt-4o-mini`) must also be enabled on your account. |
+| Empty `Indexed sources` but you uploaded | Check the terminal for transcription errors; Whisper rejects empty/corrupt audio. |
+| Slow first run with HuggingFace embedder | The model is downloaded on first use into `HF_CACHE_DIR`; subsequent runs are fast. |
 
 ---
 
-## Backwards compatibility
+## 🔄 Backwards compatibility
 
-The original [`code_rag.py`](code_rag.py) is still present as a thin shim that
-re-exports the new classes under their old names. New code should import from
-`audio_chat` directly.
+The original [`code_rag.py`](code_rag.py) is preserved as a thin shim that
+re-exports the new classes under their old names (`EmbedData`, `QdrantVDB_QB`, `Retriever`, `RAG`, `Transcribe`).
+**New code should import from `audio_chat` directly.**
 
 ---
 
-## License
+## 📄 License
 
 Apache-2.0 — see the root [LICENSE](../LICENSE) of Agent Forge.
+
+---
+
+<div align="center">
+
+🔨 Part of [**Agent Forge**](../README.md) — forging production-ready AI agents, one build at a time.
+
+</div>

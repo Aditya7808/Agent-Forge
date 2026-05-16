@@ -174,20 +174,20 @@
 
 <div align="center">
 
-### 🏆 Current Status: **17 Agents Forged — And Counting!**
+### 🏆 Current Status: **18 Agents Forged — And Counting!**
 
 ```
-Progress: ████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░ 17+ (No finish line)
+Progress: ██████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░ 18+ (No finish line)
 ```
 
 | Metric                     | Value   |
 | -------------------------- | ------- |
-| 🤖 **Agents Built**        | 17      |
-| 📝 **Lines of Code**       | 28,000+ |
-| 🌟 **Tech Stacks**         | 15      |
-| 📚 **Frameworks**          | 11      |
-| 🔗 **Integrations**        | 19      |
-| 📖 **Documentation Pages** | 42+     |
+| 🤖 **Agents Built**        | 18      |
+| 📝 **Lines of Code**       | 30,000+ |
+| 🌟 **Tech Stacks**         | 16      |
+| 📚 **Frameworks**          | 12      |
+| 🔗 **Integrations**        | 20      |
+| 📖 **Documentation Pages** | 44+     |
 
 </div>
 
@@ -216,6 +216,7 @@ Progress: ███████████████████████�
 | 15  | [📜 **ClauseAI — Contract Analysis**](./Contract%20Analysis) | Industry-grade multi-agent contract review — 7 parallel specialists for risk scoring, missing-clause detection, conflict detection, GDPR/CCPA/HIPAA/SOX compliance, PII flagging, redlined DOCX export & grounded Q&A chat | LangGraph, OpenAI (4o + 4o-mini), FAISS, Pydantic, Streamlit | ⭐⭐⭐⭐ | [▶️](./Contract%20Analysis/streamlit_app) |
 | 16  | [🏠 **AI Real Estate Agent Team**](./AI%20Real%20Estate%20Agent%20Team) | Multi-agent property search across Zillow/Realtor/Trulia/Homes — deterministic 0–100 investment scoring, 6-chart Plotly analytics dashboard, Firecrawl cache, SQLite search history, Markdown/JSON/CSV exports, pluggable LLM (Gemini · OpenAI · Anthropic · Ollama) | Agno, Firecrawl, Pydantic, Plotly, SQLite, Streamlit | ⭐⭐⭐⭐ | [▶️](./AI%20Real%20Estate%20Agent%20Team) |
 | 17  | [🛍️ **ShoppingGPT**](./ShoppingGPT-main) | AI personal-shopper for an online fashion store — multi-intent semantic router (products · policy · recommend · chitchat), guarded SELECT-only SQL tool, FAISS policy retrieval, grounded outfit recommender, per-session memory, custom dark/light chat UI with product cards | OpenAI, LangChain, Flask, FAISS, SQLite | ⭐⭐⭐ | [▶️](./ShoppingGPT-main) |
+| 18  | [🎧 **Audio-In-Chat**](./Audio-In-Chat) | Industry-grade audio transcription + RAG library — Whisper / AssemblyAI transcription, OpenAI / HuggingFace embeddings, Qdrant (memory · self-hosted · cloud), streaming GPT-4o chat with citations, typed exception hierarchy, Dockerfile + compose, FastAPI server example, importable `AudioChatPipeline` for any Python app | OpenAI Whisper, GPT-4o, Qdrant, Streamlit, FastAPI, Docker | ⭐⭐⭐⭐ | [▶️](./Audio-In-Chat) |
 
 ### 📈 Difficulty Legend
 
@@ -237,8 +238,7 @@ Progress: ███████████████████████�
 | 15  | 📧 **Email Assistant**    | Smart email drafting, categorization & auto-reply | LangChain, Gmail API              |   ⏳   |
 | 16  | 📅 **Calendar Manager**   | AI scheduling assistant with conflict resolution  | Google Calendar, Natural Language |   ⏳   |
 | 17  | 📊 **Data Analyst Agent** | Automated data analysis with visualization        | Pandas, Plotly, OpenAI            |   ⏳   |
-| 18  | 🔐 **Security Scanner**   | Code vulnerability detection agent                | CodeQL, OpenAI                    |   ⏳   |
-| 19  | 📝 **Meeting Summarizer** | Automatic meeting transcription & action items    | Whisper, LangChain                |   ⏳   |
+| 19  | 🔐 **Security Scanner**   | Code vulnerability detection agent                | CodeQL, OpenAI                    |   ⏳   |
 | 20  | 🎨 **Content Creator**    | Blog posts, social media content generation       | OpenAI, Stability AI              |   ⏳   |
 | 21  | 💰 **Finance Tracker**    | Expense categorization & budget planning          | Plaid API, OpenAI                 |   ⏳   |
 | 22  | 🏥 **Health Assistant**   | Symptom checker & wellness recommendations        | Medical APIs, Safety filters      |   ⏳   |
@@ -619,6 +619,23 @@ agent-forge/
 │       ├── static/ · templates/          # Custom CSS + vanilla JS chat UI
 │       └── data/                         # products.csv · products.db · policy.txt · FAISS cache
 │
+├── 📁 Audio-In-Chat/                     # 🆕 Industry-grade audio RAG library + Streamlit/FastAPI
+│   ├── app.py                            # Streamlit UI (sidebar config wizard, streamed chat, citations)
+│   ├── code_rag.py                       # Backwards-compat shim for the old API
+│   ├── audio_chat/                       # Importable library
+│   │   ├── config.py · exceptions.py · logger.py
+│   │   ├── embeddings.py                 # OpenAI · HuggingFace
+│   │   ├── transcriber.py                # Whisper · AssemblyAI + file validation
+│   │   ├── chunking.py                   # Speaker-aware overlapping chunks
+│   │   ├── vector_store.py               # Qdrant (memory · self-hosted · cloud)
+│   │   ├── llm.py · rag.py               # Streaming OpenAI + retrieval + sources
+│   │   └── pipeline.py                   # AudioChatPipeline facade
+│   ├── examples/                         # basic_usage.py · api_server.py (FastAPI SSE)
+│   ├── tests/                            # Offline pytest: config + chunker (10 tests)
+│   ├── Dockerfile · docker-compose.yml   # Streamlit + persistent Qdrant
+│   ├── pyproject.toml · requirements.txt
+│   └── README.md
+│
 ├── 📁 .github/
 │   ├── ISSUE_TEMPLATE/           # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md  # PR template
@@ -648,6 +665,7 @@ agent-forge/
 - [x] Add ClauseAI — industry-grade multi-agent contract review (LangGraph + OpenAI)
 - [x] Add AI Real Estate Agent Team — multi-source listings, deterministic scoring, full analytics dashboard
 - [x] Add ShoppingGPT — AI personal-shopper with multi-intent routing, guarded SQL, grounded recommendations
+- [x] Add Audio-In-Chat — industry-grade audio transcription + RAG library (Whisper + OpenAI + Qdrant)
 - [x] Rebrand to **Agent Forge** — open-ended, no-deadline collection
 - [x] Comprehensive documentation
 - [x] Contributor guidelines
