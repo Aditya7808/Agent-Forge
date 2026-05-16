@@ -1,212 +1,161 @@
-from qdrant_client import models
-from qdrant_client import QdrantClient
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.llms.sambanovasystems import SambaNovaCloud
-from llama_index.llms.ollama import Ollama
-import assemblyai as aai
-from typing import List, Dict
+"""Backwards-compatibility shim for the original `code_rag` module.
 
-from llama_index.core.base.llms.types import (
-    ChatMessage,
-    MessageRole,
+The implementation moved into the `audio_chat` package. This file preserves
+the old import paths so existing notebooks and scripts keep working.
+
+New code should import from `audio_chat` directly:
+
+    from audio_chat import AudioChatPipeline
+"""
+
+from __future__ import annotations
+
+import warnings
+from typing import Dict, List, Optional
+
+from audio_chat import AudioChatPipeline, Settings, get_settings
+from audio_chat.chunking import chunk_segments
+from audio_chat.embeddings import HuggingFaceEmbedder, OpenAIEmbedder, build_embedder
+from audio_chat.llm import OpenAIChatLLM, build_llm
+from audio_chat.rag import RAGEngine
+from audio_chat.transcriber import (
+    AssemblyAITranscriber,
+    OpenAITranscriber,
+    TranscriptSegment,
+    build_transcriber,
+)
+from audio_chat.vector_store import QdrantStore
+
+warnings.warn(
+    "`code_rag` is a compatibility shim. Import from `audio_chat` instead "
+    "(e.g. `from audio_chat import AudioChatPipeline`).",
+    DeprecationWarning,
+    stacklevel=2,
 )
 
+
 def batch_iterate(lst, batch_size):
-    """Yield successive n-sized chunks from lst."""
+    """Legacy helper: yield successive batches from `lst`."""
     for i in range(0, len(lst), batch_size):
         yield lst[i : i + batch_size]
 
+
 class EmbedData:
+    """Legacy wrapper that builds an embedder from kwargs/env and caches embeddings."""
 
-    def __init__(self, embed_model_name="BAAI/bge-large-en-v1.5", batch_size = 32):
-        self.embed_model_name = embed_model_name
-        self.embed_model = self._load_embed_model()
-        self.batch_size = batch_size
-        self.embeddings = []
-        
-    def _load_embed_model(self):
-        embed_model = HuggingFaceEmbedding(model_name=self.embed_model_name, trust_remote_code=True, cache_folder='./hf_cache')
-        return embed_model
+    def __init__(self, embed_model_name: Optional[str] = None, batch_size: int = 32):
+        settings = Settings.from_env()
+        if embed_model_name:
+            # The old default was a HF model; honor that if a HF-style name was passed.
+            settings.embedding_provider = "huggingface"
+            settings.hf_embedding_model = embed_model_name
+        settings.embedding_batch_size = batch_size
+        self.embed_model = build_embedder(settings)
+        self.contexts: List[str] = []
+        self.embeddings: List[List[float]] = []
 
-    def generate_embedding(self, context):
-        return self.embed_model.get_text_embedding_batch(context)
-        
-    def embed(self, contexts):
-        
-        self.contexts = contexts
-        
-        for batch_context in batch_iterate(contexts, self.batch_size):
-            batch_embeddings = self.generate_embedding(batch_context)
-            self.embeddings.extend(batch_embeddings)
+    def embed(self, contexts: List[str]) -> None:
+        self.contexts = list(contexts)
+        self.embeddings = self.embed_model.embed_documents(self.contexts)
+
 
 class QdrantVDB_QB:
+    """Legacy thin wrapper kept for old code paths."""
 
-    def __init__(self, collection_name, vector_dim = 768, batch_size=512):
+    def __init__(self, collection_name: str, vector_dim: int = 1536, batch_size: int = 512):
+        settings = Settings.from_env()
+        settings.qdrant_collection = collection_name
+        settings.qdrant_upsert_batch_size = batch_size
+        self._settings = settings
         self.collection_name = collection_name
-        self.batch_size = batch_size
         self.vector_dim = vector_dim
-        
-    def define_client(self):
-        
-        self.client = QdrantClient(url="http://localhost:6333", prefer_grpc=True)
-        
-    def create_collection(self):
-        
-        if not self.client.collection_exists(collection_name=self.collection_name):
+        self.store: Optional[QdrantStore] = None
 
-            self.client.create_collection(collection_name=f"{self.collection_name}",
-                                          
-                                          vectors_config=models.VectorParams(size=self.vector_dim,
-                                                                             distance=models.Distance.DOT,
-                                                                             on_disk=True),
-                                          
-                                          optimizers_config=models.OptimizersConfigDiff(default_segment_number=5,
-                                                                                        indexing_threshold=0),
-                                          
-                                          quantization_config=models.BinaryQuantization(
-                                                        binary=models.BinaryQuantizationConfig(always_ram=True)),
-                                         )
-            
-    def ingest_data(self, embeddata):
-    
-        for batch_context, batch_embeddings in zip(batch_iterate(embeddata.contexts, self.batch_size), 
-                                                    batch_iterate(embeddata.embeddings, self.batch_size)):
-    
-            self.client.upload_collection(collection_name=self.collection_name,
-                                          vectors=batch_embeddings,
-                                          payload=[{"context": context} for context in batch_context])
+    def define_client(self) -> None:
+        self.store = QdrantStore(self._settings, vector_dim=self.vector_dim)
+        # mirror old attribute name
+        self.client = self.store.client
 
-        self.client.update_collection(collection_name=self.collection_name,
-                                      optimizer_config=models.OptimizersConfigDiff(indexing_threshold=20000)
-                                     )
-        
+    def create_collection(self) -> None:
+        assert self.store is not None, "Call define_client() first."
+        self.store.ensure_collection()
+
+    def ingest_data(self, embeddata: "EmbedData") -> None:
+        assert self.store is not None, "Call define_client() first."
+        payloads = [{"text": c, "context": c} for c in embeddata.contexts]
+        self.store.upsert(embeddata.embeddings, payloads)
+
+
 class Retriever:
+    """Legacy retriever facade — delegates to the new QdrantStore."""
 
-    def __init__(self, vector_db, embeddata):
-        
+    def __init__(self, vector_db: "QdrantVDB_QB", embeddata: "EmbedData"):
         self.vector_db = vector_db
         self.embeddata = embeddata
 
-    def search(self, query):
-        query_embedding = self.embeddata.embed_model.get_query_embedding(query)
-        
-        
-        result = self.vector_db.client.search(
-            collection_name=self.vector_db.collection_name,
-            
-            query_vector=query_embedding,
-            
-            search_params=models.SearchParams(
-                quantization=models.QuantizationSearchParams(
-                    ignore=False,
-                    rescore=True,
-                    oversampling=2.0,
-                )
-            ),
-            
-            timeout=1000,
-        )
+    def search(self, query: str, top_k: int = 5):
+        assert self.vector_db.store is not None, "Call define_client()/create_collection() first."
+        vec = self.embeddata.embed_model.embed_query(query)
+        return self.vector_db.store.search(vec, top_k=top_k)
 
-        return result
-    
+
 class RAG:
+    """Legacy RAG facade using the new RAGEngine internally."""
 
-    def __init__(self,
-                 retriever,
-                 llm_name = "Meta-Llama-3.1-405B-Instruct"
-                 ):
-        
-        system_msg = ChatMessage(
-            role=MessageRole.SYSTEM,
-            content="You are a helpful assistant that answers questions about the user's document.",
+    def __init__(self, retriever: "Retriever", llm_name: Optional[str] = None):
+        settings = Settings.from_env()
+        if llm_name:
+            settings.llm_model = llm_name
+        self._settings = settings
+        self._llm = build_llm(settings)
+        self._engine = RAGEngine(
+            embedder=retriever.embeddata.embed_model,
+            store=retriever.vector_db.store,  # type: ignore[arg-type]
+            llm=self._llm,
+            settings=settings,
         )
-        self.messages = [system_msg, ]
-        self.llm_name = llm_name
-        self.llm = self._setup_llm()
-        self.retriever = retriever
-        self.qa_prompt_tmpl_str = ("Context information is below.\n"
-                                   "---------------------\n"
-                                   "{context}\n"
-                                   "---------------------\n"
-                                   "Given the context information above I want you to think step by step to answer the query in a crisp manner, incase case you don't know the answer say 'I don't know!'.\n"
-                                   "Query: {query}\n"
-                                   "Answer: "
-                                   )
 
-    def _setup_llm(self):
+    def query(self, query: str):
+        """Returns a generator of token strings (matches the old streaming API)."""
+        return self._engine.stream_query(query)
 
-        return SambaNovaCloud(
-                        model=self.llm_name,
-                        temperature=0.7,
-                        context_window=100000,
-                    )
-
-        # return Ollama(model=self.llm_name,
-        #               temperature=0.7,
-        #               context_window=100000,
-        #             )
-
-    def generate_context(self, query):
-
-        result = self.retriever.search(query)
-        context = [dict(data) for data in result]
-        combined_prompt = []
-
-        for entry in context[:2]:
-            context = entry["payload"]["context"]
-
-            combined_prompt.append(context)
-
-        return "\n\n---\n\n".join(combined_prompt)
-
-    def query(self, query):
-        context = self.generate_context(query=query)
-        
-        prompt = self.qa_prompt_tmpl_str.format(context=context, query=query)
-
-        user_msg = ChatMessage(role=MessageRole.USER, content=prompt)
-
-        # self.messages.append(ChatMessage(role=MessageRole.USER, content=prompt))
-                
-        streaming_response = self.llm.stream_complete(user_msg.content)
-        
-        return streaming_response
-    
-    # def append_ai_response(self, message):
-
-    #     self.messages.append(ChatMessage(role=MessageRole.ASSISTANT, content=message))
 
 class Transcribe:
+    """Legacy AssemblyAI transcriber kept for parity with the old API."""
+
     def __init__(self, api_key: str):
-        """Initialize the Transcribe class with AssemblyAI API key."""
-        aai.settings.api_key = api_key
-        self.transcriber = aai.Transcriber()
-        
+        settings = Settings.from_env()
+        settings.transcription_provider = "assemblyai"
+        settings.assemblyai_api_key = api_key
+        self._impl = AssemblyAITranscriber(settings)
+
     def transcribe_audio(self, audio_path: str) -> List[Dict[str, str]]:
-        """
-        Transcribe an audio file and return speaker-labeled transcripts.
-        
-        Args:
-            audio_path: Path to the audio file
-            
-        Returns:
-            List of dictionaries containing speaker and text information
-        """
-        # Configure transcription with speaker labels
-        config = aai.TranscriptionConfig(
-            speaker_labels=True,
-            speakers_expected=2  # Adjust this based on your needs
-        )
-        
-        # Transcribe the audio
-        transcript = self.transcriber.transcribe(audio_path, config=config)
-        
-        # Extract speaker utterances
-        speaker_transcripts = []
-        for utterance in transcript.utterances:
-            speaker_transcripts.append({
-                "speaker": f"Speaker {utterance.speaker}",
-                "text": utterance.text
-            })
-            
-        return speaker_transcripts
+        segs = self._impl.transcribe(audio_path)
+        return [{"speaker": s.speaker or "Speaker", "text": s.text} for s in segs]
+
+
+__all__ = [
+    # Legacy
+    "batch_iterate",
+    "EmbedData",
+    "QdrantVDB_QB",
+    "Retriever",
+    "RAG",
+    "Transcribe",
+    # New API re-exports
+    "AudioChatPipeline",
+    "Settings",
+    "get_settings",
+    "OpenAIEmbedder",
+    "HuggingFaceEmbedder",
+    "OpenAITranscriber",
+    "AssemblyAITranscriber",
+    "TranscriptSegment",
+    "QdrantStore",
+    "RAGEngine",
+    "OpenAIChatLLM",
+    "build_embedder",
+    "build_transcriber",
+    "build_llm",
+    "chunk_segments",
+]

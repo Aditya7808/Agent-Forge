@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "audio-chat"
+version = "1.0.0"
+description = "Production-grade audio transcription + RAG chat library with a Streamlit UI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Agent Forge", email = "hello@u2xai.com" }]
+keywords = ["rag", "audio", "transcription", "openai", "whisper", "qdrant", "streamlit"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "openai>=1.40.0",
+    "qdrant-client>=1.10.0",
+]
+
+[project.optional-dependencies]
+streamlit = ["streamlit>=1.36.0"]
+assemblyai = ["assemblyai>=0.27.0"]
+huggingface = ["sentence-transformers>=3.0.0"]
+api = ["fastapi>=0.111.0", "uvicorn[standard]>=0.30.0", "python-multipart>=0.0.9"]
+dev = ["pytest>=8.0.0"]
+all = [
+    "streamlit>=1.36.0",
+    "assemblyai>=0.27.0",
+    "sentence-transformers>=3.0.0",
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/ayusingh-54/agent-forge"
+Repository = "https://github.com/ayusingh-54/agent-forge"
+Issues = "https://github.com/ayusingh-54/agent-forge/issues"
+
+[tool.setuptools.packages.find]
+include = ["audio_chat*"]
+exclude = ["tests*", "examples*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra -q"
