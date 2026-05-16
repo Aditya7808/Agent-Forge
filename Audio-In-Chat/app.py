@@ -22,6 +22,12 @@ from typing import List, Optional
 
 import streamlit as st
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent / ".env")
+except ImportError:
+    pass
+
 from audio_chat import AudioChatPipeline, Settings, __version__
 from audio_chat.exceptions import (
     AudioChatError,

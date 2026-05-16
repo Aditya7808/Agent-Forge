@@ -22,6 +22,12 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from audio_chat import AudioChatPipeline
 from audio_chat.exceptions import AudioChatError
 
