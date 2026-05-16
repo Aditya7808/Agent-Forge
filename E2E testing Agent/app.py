@@ -370,7 +370,7 @@ def render_test_form():
     with col1:
         target_url = st.text_input(
             "Target URL",
-            value="http://localhost:5000",
+            value="http://localhost:5050",
             placeholder="https://example.com",
             help="URL of the website to test. Start the demo app with: python demo_app.py",
         )
