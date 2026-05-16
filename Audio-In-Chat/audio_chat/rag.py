@@ -18,25 +18,40 @@ logger = get_logger("rag")
 
 
 SYSTEM_PROMPT = (
-    "You are a precise assistant that answers questions strictly from the provided "
-    "transcript context. Follow these rules:\n"
-    "1. Base every answer on the context. If the answer is not present, reply: "
-    "\"I don't know based on the provided audio.\"\n"
-    "2. Quote short relevant phrases when helpful, and attribute them to the speaker "
-    "label when available (e.g. \"Speaker A said ...\").\n"
-    "3. Be concise; do not invent details that are not in the transcript."
+    "You are a helpful assistant for an audio-RAG application. The user has uploaded "
+    "an audio file (meeting, podcast, lecture, voice note, etc.) which has been "
+    "transcribed and indexed. For each turn you receive the most relevant transcript "
+    "excerpts and the user's message.\n\n"
+    "Guidelines:\n"
+    "• Ground every factual claim in the provided context — never invent details that "
+    "are not in the transcript.\n"
+    "• You ARE allowed (and expected) to SUMMARIZE, EXPLAIN, TRANSLATE, REPHRASE, or "
+    "ANSWER FOLLOW-UP QUESTIONS about the context. \"Explain this in Hindi\", "
+    "\"summarize\", \"what is this about?\", \"give me bullet points\" are all valid "
+    "and should be answered using the context — do NOT refuse them.\n"
+    "• If the user asks for something that the transcript truly does not contain "
+    "(e.g. a person/topic that never appears), reply: \"I don't know based on the "
+    "provided audio.\"\n"
+    "• If the transcript is very short, just work with what's there — a one-line "
+    "transcript can still be summarized or translated.\n"
+    "• For greetings or chit-chat (\"hi\", \"hello\"), respond briefly and invite the "
+    "user to ask something about the audio — don't refuse.\n"
+    "• When quoting, attribute to the speaker label when available "
+    "(e.g. \"Speaker A said ...\").\n"
+    "• Be concise unless the user asks for detail."
 )
 
 
 QA_TEMPLATE = (
-    "Transcript context (most relevant excerpts):\n"
-    "---------------------\n"
+    "Transcript excerpts retrieved for this turn (most relevant first):\n"
+    "=====================\n"
     "{context}\n"
-    "---------------------\n"
-    "Conversation so far:\n{history}\n"
-    "---------------------\n"
-    "User question: {query}\n"
-    "Answer:"
+    "=====================\n"
+    "Recent conversation:\n{history}\n"
+    "=====================\n"
+    "User message: {query}\n\n"
+    "Respond following the guidelines. If the user asked you to summarize, explain, "
+    "or translate, do so based on the transcript above — do not refuse."
 )
 
 
@@ -60,7 +75,13 @@ class RAGEngine:
         self.store = store
         self.llm = llm
         self.settings = settings
-        self.system_prompt = system_prompt or SYSTEM_PROMPT
+        # Store explicit override; fall back to module-level SYSTEM_PROMPT at use
+        # time so hot-reloads of the prompt take effect without re-instantiating.
+        self._system_prompt_override = system_prompt
+
+    @property
+    def system_prompt(self) -> str:
+        return self._system_prompt_override or SYSTEM_PROMPT
 
     # ---- retrieval ----
 
