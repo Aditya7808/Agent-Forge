@@ -25,14 +25,14 @@ import subprocess
 from typing import TypedDict, Annotated, Sequence, List, Dict, Any, Optional
 from contextlib import redirect_stdout
 
-from langgraph.graph import Graph, END
+from langgraph.graph import StateGraph, END
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate
-from langchain.prompts.chat import (
+from langchain_core.prompts.chat import (
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
-from langchain.output_parsers import PydanticOutputParser
+from langchain_core.output_parsers import PydanticOutputParser
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
@@ -667,9 +667,9 @@ Generated test **`{state.get("test_name", "unknown")}`** for endpoint `{state["t
     # ------------------------------------------------------------------
     # Build workflow
     # ------------------------------------------------------------------
-    def _build_workflow(self) -> Graph:
+    def _build_workflow(self):
         """Build and compile the LangGraph workflow."""
-        workflow = Graph()
+        workflow = StateGraph(GraphState)
 
         # Add nodes
         workflow.add_node(
