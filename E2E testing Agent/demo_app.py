@@ -239,7 +239,7 @@ def register():
 # Main
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    print("🚀 Demo Registration App running at http://localhost:5000")
+    print("🚀 Demo Registration App running at http://localhost:5050")
     print("   Use this as a target URL for the E2E Testing Agent.")
     print("   Press Ctrl+C to stop.\n")
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5050, debug=True)
