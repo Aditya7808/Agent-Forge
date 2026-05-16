@@ -26,5 +26,5 @@ flask>=3.0.0
 # Async support
 nest-asyncio>=1.6.0
 
-# Optional: Groq provider
-# langchain-groq>=0.2.0
+# Groq provider
+langchain-groq>=0.2.0

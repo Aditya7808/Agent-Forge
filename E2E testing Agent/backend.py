@@ -157,7 +157,7 @@ class E2ETestingAgent:
 
     def __init__(
         self,
-        provider: str = "openai",
+        provider: str = "groq",
         model_name: Optional[str] = None,
         temperature: float = 0.0,
         api_key: Optional[str] = None,
@@ -816,7 +816,7 @@ Generated test **`{state.get("test_name", "unknown")}`** for endpoint `{state["t
 def run_e2e_test(
     query: str,
     target_url: str,
-    provider: str = "openai",
+    provider: str = "groq",
     model_name: Optional[str] = None,
     temperature: float = 0.0,
     api_key: Optional[str] = None,

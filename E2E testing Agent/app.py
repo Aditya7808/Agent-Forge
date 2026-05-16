@@ -191,7 +191,7 @@ def render_sidebar():
         provider = st.selectbox(
             "LLM Provider",
             options=["openai", "groq", "azure_openai"],
-            index=0,
+            index=1,
             help="Select the LLM provider for code generation.",
         )
 
