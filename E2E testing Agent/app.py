@@ -11,10 +11,31 @@ Usage:
 
 import streamlit as st
 import os
+import sys
 import time
+import subprocess
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# ---------------------------------------------------------------------------
+# Playwright Browser Installation (for Streamlit Cloud)
+# ---------------------------------------------------------------------------
+@st.cache_resource
+def install_playwright_browsers():
+    """Install Playwright Chromium browser binaries on first run (Streamlit Cloud)."""
+    try:
+        subprocess.run(
+            [sys.executable, "-m", "playwright", "install", "chromium", "--with-deps"],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+    except Exception:
+        pass  # Silently continue — tests won't run but UI will still load
+
+install_playwright_browsers()
 
 # ---------------------------------------------------------------------------
 # Page Configuration
