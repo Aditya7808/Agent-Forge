@@ -1,80 +1,224 @@
-# RAG with SQL Router
+# RAG + SQL Router: Intelligent Hybrid Query Engine
 
-We are developing a system that will guide you in creating a custom agent. This agent can query either your Vector DB index for RAG-based retrieval or a separate SQL query engine. 
+A production-grade AI agent that intelligently routes natural language queries between a **SQL database** and a **RAG (Retrieval-Augmented Generation) pipeline** — with built-in response validation and trust scoring via Cleanlab Codex.
 
-## 🔍 **The Critical Component: Response Validation**
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?logo=openai&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?logo=tailwindcss&logoColor=white)
 
-**While everyone is trying to build agents, no one tells you how to ensure their outputs are reliable.**
+---
 
-**[Cleanlab Codex](https://help.cleanlab.ai/codex/)**, developed by researchers from MIT, offers a platform to evaluate and monitor any RAG or agentic app you're building. This system integrates Cleanlab Codex for automatic response validation, ensuring your AI outputs are trustworthy and continuously improving.
+## Architecture
 
-### **Why Cleanlab Codex is Essential:**
-
-- **🔍 Automatic Detection**: Detects inaccurate/unhelpful responses from your AI automatically
-- **📈 Continuous Improvement**: Allows Subject Matter Experts to directly improve responses without engineering intervention  
-- **🎯 Trust Scoring**: Provides reliability metrics for every response
-- **🔄 Real-time Validation**: Validates queries and responses in real-time
-- **📊 Analytics**: Track improvement rates and response quality over time
-
-### **How It Works in This System:**
-
-1. **Query Processing**: Your queries are automatically validated by Cleanlab Codex
-2. **Response Validation**: AI responses are scored for reliability and accuracy
-3. **SME Intervention**: Subject Matter Experts can improve responses through the Codex interface
-4. **Continuous Learning**: The system learns from validated responses for future queries
-
-We use:
-
-- [Llama_Index](https://docs.llamaindex.ai/en/stable/) for orchestration
-- [Docling](https://docling-project.github.io/docling) for simplifying document processing
-- [Milvus](https://milvus.io/) to self-host a VectorDB
-- **[Cleanlab Codex](https://help.cleanlab.ai/codex/)** for **response validation and reliability assurance** ⭐
-- [OpenRouterAI](https://openrouter.ai/docs/quick-start) to access Alibaba's Qwen model
-
-> **💡 Key Insight**: While most tutorials focus on building agents, **[Cleanlab Codex](https://help.cleanlab.ai/codex/)** addresses the critical gap of ensuring those agents produce reliable, trustworthy outputs.
-
-## Set Up
-
-Follow these steps one by one:
-
-### Setup Milvus VectorDB
-
-Milvus provides an installation script to install it as a docker container.
-
-To install Milvus in Docker, you can use the following command:
-
-```bash
-curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-bash standalone_embed.sh start
+```
+┌─────────────────────────────────────────────────────────┐
+│                   React + Tailwind UI                     │
+│         (Chat Interface, Database Explorer, Upload)       │
+└───────────────────────────┬─────────────────────────────┘
+                            │ REST API
+┌───────────────────────────▼─────────────────────────────┐
+│                    FastAPI Backend                        │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │            Intelligent Query Router                │   │
+│  │         (GPT-4o-mini Classification)              │   │
+│  └──────────┬──────────────────────┬────────────────┘   │
+│             │                      │                     │
+│  ┌──────────▼──────────┐  ┌───────▼────────────────┐   │
+│  │    SQL Engine        │  │    RAG Engine           │   │
+│  │  • NL → SQL Gen     │  │  • ChromaDB Vectors     │   │
+│  │  • SQLite Query      │  │  • OpenAI Embeddings    │   │
+│  │  • Response Synth    │  │  • Context Retrieval    │   │
+│  └─────────────────────┘  │  • Answer Generation    │   │
+│                            └───────────┬────────────┘   │
+│                                        │                 │
+│                            ┌───────────▼────────────┐   │
+│                            │  Cleanlab Codex         │   │
+│                            │  Trust Scoring          │   │
+│                            └────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
 ```
 
-### Install Dependencies
+## Key Features
+
+- **Intelligent Routing** — GPT-4o-mini classifies queries and routes them to the optimal engine (SQL or RAG) automatically
+- **Text-to-SQL** — Converts natural language to SQL queries against a city statistics database
+- **RAG Pipeline** — Upload documents (PDF, DOCX, PPTX, TXT) and ask questions with semantic search
+- **Trust Scoring** — Cleanlab Codex validates RAG responses with trustworthiness metrics
+- **Modern UI** — Dark-themed React frontend with real-time chat, database explorer, and interactive charts
+- **Production API** — FastAPI backend with proper error handling, validation, and CORS support
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **LLM** | OpenAI GPT-4o-mini |
+| **Embeddings** | OpenAI text-embedding-3-small |
+| **Vector Store** | ChromaDB (persistent, local) |
+| **Backend** | FastAPI + Uvicorn |
+| **Frontend** | React 18 + Tailwind CSS + Recharts |
+| **Database** | SQLite (city statistics) |
+| **Validation** | Cleanlab Codex |
+| **Build Tool** | Vite |
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.10+
+- Node.js 18+
+- OpenAI API key
+
+### 1. Clone & Install Backend
 
 ```bash
-uv sync
+cd Rag-sql-router
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-## Run the Notebook
-
-You can run the `notebook.ipynb` file to test the functionality of the code in a Jupyter Notebook environment. This notebook will help you understand routing, tool calling, and validating responses.
-
-## Run the Application
-
-To run the Streamlit app, use the following command:
+### 2. Configure Environment
 
 ```bash
-streamlit run app.py
+cp .env.example .env
+# Edit .env and add your API keys
 ```
 
-Open your browser and navigate to `http://localhost:8501` to access the app.
+```env
+OPENAI_API_KEY=sk-your-key-here
+CODEX_API_KEY=your-codex-key-here  # Optional
+```
 
-## 📬 Stay Updated with Our Newsletter!
+### 3. Start Backend
 
-**Get a FREE Data Science eBook** 📖 with 150+ essential lessons in Data Science when you subscribe to our newsletter! Stay in the loop with the latest tutorials, insights, and exclusive resources. [Subscribe now!](https://join.dailydoseofds.com)
+```bash
+python run.py
+```
 
-[![Daily Dose of Data Science Newsletter](https://github.com/patchy631/ai-engineering/blob/main/resources/join_ddods.png)](https://join.dailydoseofds.com)
+The API will be available at `http://localhost:8000` with interactive docs at `http://localhost:8000/docs`.
 
-## Contribution
+### 4. Install & Start Frontend
 
-Contributions are welcome! Feel free to fork this repository and submit pull requests with your improvements.
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The UI will be available at `http://localhost:5173`.
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/chat/` | Send a query (auto-routed to SQL or RAG) |
+| `POST` | `/api/documents/upload` | Upload documents for RAG |
+| `GET` | `/api/database/stats` | Get database statistics |
+| `GET` | `/api/database/data` | Get all city data |
+| `POST` | `/api/database/query` | Run custom SQL query |
+| `GET` | `/api/health` | Health check |
+
+### Example Request
+
+```bash
+curl -X POST http://localhost:8000/api/chat/ \
+  -H "Content-Type: application/json" \
+  -d '{"message": "What is the population of Houston, Texas?"}'
+```
+
+### Example Response
+
+```json
+{
+  "response": "Houston, Texas has a population of 2,304,580.",
+  "route_used": "sql",
+  "trust_score": null,
+  "sql_query": "SELECT population FROM city_stats WHERE city_name = 'Houston' AND state = 'Texas'",
+  "metadata": {"data": [{"population": 2304580}]}
+}
+```
+
+## How the Router Works
+
+1. **Query Classification** — The router uses GPT-4o-mini with a specialized system prompt to classify incoming queries into `sql` or `rag` categories based on intent
+
+2. **SQL Path** — For city/population queries:
+   - Generates SQL from natural language
+   - Executes against SQLite database
+   - Synthesizes a human-readable response
+
+3. **RAG Path** — For document queries:
+   - Retrieves top-k relevant chunks from ChromaDB
+   - Generates an answer grounded in the retrieved context
+   - Validates the response through Cleanlab Codex for trust scoring
+
+## Project Structure
+
+```
+Rag-sql-router/
+├── backend/
+│   ├── main.py              # FastAPI application entry point
+│   ├── config.py            # Configuration and settings
+│   ├── models.py            # Pydantic request/response schemas
+│   ├── routes/
+│   │   ├── chat.py          # Chat endpoint (routing logic)
+│   │   ├── documents.py     # Document upload & processing
+│   │   └── database.py      # Database exploration endpoints
+│   ├── services/
+│   │   ├── router.py        # Query classification (SQL vs RAG)
+│   │   ├── sql_engine.py    # Natural language to SQL
+│   │   ├── rag_engine.py    # RAG pipeline (ChromaDB + OpenAI)
+│   │   └── trust_scorer.py  # Cleanlab Codex integration
+│   └── data/
+│       └── city_database.sqlite
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx          # Main application
+│   │   ├── api.js           # API client
+│   │   ├── components/      # React components
+│   │   └── hooks/           # Custom hooks
+│   ├── package.json
+│   └── vite.config.js
+├── notebook.ipynb           # Development notebook
+├── requirements.txt
+├── run.py                   # Backend start script
+└── .env.example
+```
+
+## Trust Scoring
+
+When documents are uploaded and RAG is used, responses include a trust score powered by Cleanlab Codex:
+
+- **70-100%** (High Trust) — Response is well-grounded in the source documents
+- **50-69%** (Medium Trust) — Response may have some unsupported claims
+- **Below 50%** (Low Trust) — Response may be unreliable; system may apply guardrails
+
+## Development
+
+### Backend Development
+
+```bash
+# Run with auto-reload
+python run.py
+
+# API docs available at http://localhost:8000/docs
+```
+
+### Frontend Development
+
+```bash
+cd frontend
+npm run dev    # Dev server with HMR
+npm run build  # Production build
+```
+
+## License
+
+MIT
