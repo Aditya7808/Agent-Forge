@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from pydantic_settings import BaseSettings
 
+BASE_DIR = Path(__file__).resolve().parent
+
 
 class Settings(BaseSettings):
     openai_api_key: str = ""
@@ -9,9 +11,9 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4o-mini"
     embedding_model: str = "text-embedding-3-small"
     embedding_dimensions: int = 1536
-    chroma_persist_dir: str = "./chroma_db"
-    database_path: str = str(Path(__file__).parent / "data" / "city_database.sqlite")
-    upload_dir: str = str(Path(__file__).parent / "uploads")
+    chroma_persist_dir: str = str(BASE_DIR.parent / "chroma_db")
+    database_path: str = str(BASE_DIR / "data" / "city_database.sqlite")
+    upload_dir: str = str(BASE_DIR / "uploads")
     max_upload_size_mb: int = 50
     similarity_top_k: int = 3
     cors_origins: list = ["http://localhost:5173", "http://localhost:3000"]
