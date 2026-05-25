@@ -1,13 +1,15 @@
 import os
 import uuid
 import shutil
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from typing import List
+import logging
+from fastapi import APIRouter, UploadFile, File, HTTPException, Form
+from typing import List, Optional
 from backend.models import DocumentUploadResponse
-from backend.services.rag_engine import process_documents
+from backend.services.vector_store import ingest_documents, clear_session
 from backend.config import settings
 
 router = APIRouter(prefix="/api/documents", tags=["documents"])
+logger = logging.getLogger(__name__)
 
 ALLOWED_EXTENSIONS = {".pdf", ".docx", ".pptx", ".txt"}
 
@@ -15,7 +17,7 @@ ALLOWED_EXTENSIONS = {".pdf", ".docx", ".pptx", ".txt"}
 @router.post("/upload", response_model=DocumentUploadResponse)
 async def upload_documents(
     files: List[UploadFile] = File(...),
-    session_id: str = None,
+    session_id: Optional[str] = Form(None),
 ):
     if not files:
         raise HTTPException(status_code=400, detail="No files provided")
@@ -30,14 +32,13 @@ async def upload_documents(
     for file in files:
         ext = os.path.splitext(file.filename)[1].lower()
         if ext not in ALLOWED_EXTENSIONS:
+            logger.warning(f"Skipping unsupported file: {file.filename}")
             continue
 
-        file_size = 0
         file_path = os.path.join(session_dir, file.filename)
         with open(file_path, "wb") as f:
             content = await file.read()
-            file_size = len(content)
-            if file_size > settings.max_upload_size_mb * 1024 * 1024:
+            if len(content) > settings.max_upload_size_mb * 1024 * 1024:
                 os.remove(file_path)
                 raise HTTPException(
                     status_code=413,
@@ -47,12 +48,16 @@ async def upload_documents(
         processed_count += 1
 
     if processed_count == 0:
-        raise HTTPException(status_code=400, detail="No valid files uploaded. Supported: PDF, DOCX, PPTX, TXT")
+        raise HTTPException(
+            status_code=400,
+            detail="No valid files uploaded. Supported: PDF, DOCX, PPTX, TXT"
+        )
 
     try:
-        chunks_created = process_documents(session_id, session_dir)
+        chunks_created = ingest_documents(session_id, session_dir)
     except Exception as e:
         shutil.rmtree(session_dir, ignore_errors=True)
+        logger.exception("Document ingestion failed")
         raise HTTPException(status_code=500, detail=f"Document processing failed: {str(e)}")
 
     return DocumentUploadResponse(
@@ -67,4 +72,5 @@ async def delete_session_documents(session_id: str):
     session_dir = os.path.join(settings.upload_dir, session_id)
     if os.path.exists(session_dir):
         shutil.rmtree(session_dir, ignore_errors=True)
+    clear_session(session_id)
     return {"message": "Session documents cleared"}
