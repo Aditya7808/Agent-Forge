@@ -1,15 +1,18 @@
 import os
 import uuid
+import logging
 from backend.config import settings
 
-codex_project = None
-codex_session_id = None
+logger = logging.getLogger(__name__)
+
+_codex_project = None
+_codex_session_id = None
 
 
 def initialize_codex(session_id: str):
-    global codex_project, codex_session_id
+    global _codex_project, _codex_session_id
 
-    if not settings.codex_api_key:
+    if not settings.codex_api_key or settings.codex_api_key.startswith("your-"):
         return None
 
     os.environ["CODEX_API_KEY"] = settings.codex_api_key
@@ -18,18 +21,18 @@ def initialize_codex(session_id: str):
         from cleanlab_codex.client import Client
         from cleanlab_codex.project import Project
 
-        if codex_project and codex_session_id == session_id:
-            return codex_project
+        if _codex_project and _codex_session_id == session_id:
+            return _codex_project
 
         client = Client()
         project_id = str(uuid.uuid4())[:8]
         project = client.create_project(name=f"RAG-SQL-Router-{project_id}")
         access_key = project.create_access_key("default key")
-        codex_project = Project.from_access_key(access_key)
-        codex_session_id = session_id
-        return codex_project
+        _codex_project = Project.from_access_key(access_key)
+        _codex_session_id = session_id
+        return _codex_project
     except Exception as e:
-        print(f"Codex initialization failed: {e}")
+        logger.warning(f"Codex initialization failed: {e}")
         return None
 
 
@@ -42,7 +45,11 @@ def validate_response(
     project = initialize_codex(session_id)
 
     if not project:
-        return {"trust_score": None, "validated_response": response, "guardrailed": False}
+        return {
+            "trust_score": None,
+            "validated_response": response,
+            "guardrailed": False,
+        }
 
     try:
         prompt = (
@@ -72,8 +79,12 @@ def validate_response(
         return {
             "trust_score": float(trust_score),
             "validated_response": final_response,
-            "guardrailed": result.should_guardrail if hasattr(result, 'should_guardrail') else False,
+            "guardrailed": bool(getattr(result, "should_guardrail", False)),
         }
     except Exception as e:
-        print(f"Codex validation error: {e}")
-        return {"trust_score": None, "validated_response": response, "guardrailed": False}
+        logger.warning(f"Codex validation error: {e}")
+        return {
+            "trust_score": None,
+            "validated_response": response,
+            "guardrailed": False,
+        }
