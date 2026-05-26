@@ -174,20 +174,20 @@
 
 <div align="center">
 
-### 🏆 Current Status: **18 Agents Forged — And Counting!**
+### 🏆 Current Status: **20 Agents Forged — And Counting!**
 
 ```
-Progress: ██████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░ 18+ (No finish line)
+Progress: ████████████████████████████████░░░░░░░░░░░░░░░░░░░░░ 20+ (No finish line)
 ```
 
 | Metric                     | Value   |
 | -------------------------- | ------- |
-| 🤖 **Agents Built**        | 18      |
-| 📝 **Lines of Code**       | 30,000+ |
-| 🌟 **Tech Stacks**         | 16      |
-| 📚 **Frameworks**          | 12      |
-| 🔗 **Integrations**        | 20      |
-| 📖 **Documentation Pages** | 44+     |
+| 🤖 **Agents Built**        | 20      |
+| 📝 **Lines of Code**       | 35,000+ |
+| 🌟 **Tech Stacks**         | 18      |
+| 📚 **Frameworks**          | 14      |
+| 🔗 **Integrations**        | 22      |
+| 📖 **Documentation Pages** | 46+     |
 
 </div>
 
@@ -218,6 +218,7 @@ Progress: ███████████████████████�
 | 17  | [🛍️ **ShoppingGPT**](./ShoppingGPT-main) | AI personal-shopper for an online fashion store — multi-intent semantic router (products · policy · recommend · chitchat), guarded SELECT-only SQL tool, FAISS policy retrieval, grounded outfit recommender, per-session memory, custom dark/light chat UI with product cards | OpenAI, LangChain, Flask, FAISS, SQLite | ⭐⭐⭐ | [▶️](./ShoppingGPT-main) |
 | 18  | [🎧 **Audio-In-Chat**](./Audio-In-Chat) | Industry-grade audio transcription + RAG library — Whisper / AssemblyAI transcription, OpenAI / HuggingFace embeddings, Qdrant (memory · self-hosted · cloud), streaming GPT-4o chat with citations, typed exception hierarchy, Dockerfile + compose, FastAPI server example, importable `AudioChatPipeline` for any Python app | OpenAI Whisper, GPT-4o, Qdrant, Streamlit, FastAPI, Docker | ⭐⭐⭐⭐ | [▶️](./Audio-In-Chat) |
 | 19  | [🧪 **E2E Testing Agent**](./E2E%20testing%20Agent) | AI agent that converts natural language test descriptions into executable Playwright E2E test scripts — multi-step LangGraph pipeline with DOM analysis, iterative code generation, retry logic, subprocess pytest execution & structured markdown reports | LangGraph, Playwright, Pydantic, Streamlit | ⭐⭐⭐⭐ | [▶️](./E2E%20testing%20Agent) |
+| 20  | [🔀 **RAG + SQL Router**](./Rag-sql-router) | Intelligent hybrid query engine that auto-routes natural language between SQL (city stats DB) and RAG (uploaded PDFs/DOCX) via LangGraph StateGraph — Text-to-SQL with safety guards, ChromaDB retrieval, Cleanlab Codex trust scoring, FastAPI + React/Tailwind industry-grade UI with chat, database explorer & charts | LangGraph, LangChain, OpenAI GPT-4o-mini, ChromaDB, Cleanlab Codex, FastAPI, React, Tailwind | ⭐⭐⭐⭐ | [▶️](./Rag-sql-router) |
 
 ### 📈 Difficulty Legend
 
@@ -637,6 +638,31 @@ agent-forge/
 │   ├── pyproject.toml · requirements.txt
 │   └── README.md
 │
+├── 📁 Rag-sql-router/                    # 🆕 Hybrid SQL + RAG agent (LangGraph + LangChain)
+│   ├── backend/                          # FastAPI + LangGraph backend
+│   │   ├── main.py                       # FastAPI app + lifespan + CORS
+│   │   ├── config.py · models.py         # Pydantic settings + schemas
+│   │   ├── graph/                        # LangGraph StateGraph
+│   │   │   ├── state.py                  # AgentState TypedDict
+│   │   │   ├── workflow.py               # classify → sql/rag → trust → END
+│   │   │   └── nodes/                    # classifier · sql_node · rag_node · trust_node
+│   │   ├── services/                     # LangChain chains
+│   │   │   ├── llm.py                    # Cached ChatOpenAI + OpenAIEmbeddings
+│   │   │   ├── sql_chain.py              # LCEL Text-to-SQL + safety guards
+│   │   │   ├── rag_chain.py              # Retriever + RAG prompt + LCEL
+│   │   │   ├── vector_store.py           # Chroma + LangChain document loaders
+│   │   │   └── trust_scorer.py           # Cleanlab Codex integration
+│   │   ├── routes/                       # chat · documents · database
+│   │   └── data/                         # city_database.sqlite + seed script (192 cities)
+│   ├── frontend/                         # React 18 + Vite + Tailwind
+│   │   └── src/
+│   │       ├── App.jsx · api.js          # SPA shell + REST client
+│   │       ├── components/               # Header · Sidebar · ChatInterface · MessageBubble · TrustBadge · DatabaseExplorer
+│   │       └── hooks/useChat.js          # Custom chat state hook
+│   ├── notebook.ipynb                    # End-to-end LangChain notebook
+│   ├── run.py · requirements.txt · .env.example
+│   └── README.md
+│
 ├── 📁 .github/
 │   ├── ISSUE_TEMPLATE/           # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md  # PR template
@@ -667,6 +693,8 @@ agent-forge/
 - [x] Add AI Real Estate Agent Team — multi-source listings, deterministic scoring, full analytics dashboard
 - [x] Add ShoppingGPT — AI personal-shopper with multi-intent routing, guarded SQL, grounded recommendations
 - [x] Add Audio-In-Chat — industry-grade audio transcription + RAG library (Whisper + OpenAI + Qdrant)
+- [x] Add E2E Testing Agent — NL → Playwright test generation with LangGraph + DOM analysis
+- [x] Add RAG + SQL Router — hybrid query engine with LangGraph routing, Text-to-SQL, ChromaDB RAG & Cleanlab trust scoring
 - [x] Rebrand to **Agent Forge** — open-ended, no-deadline collection
 - [x] Comprehensive documentation
 - [x] Contributor guidelines
