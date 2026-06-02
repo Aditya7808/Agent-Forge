@@ -768,12 +768,13 @@ git push origin feature/amazing-feature
 
 Join our growing community of AI enthusiasts!
 
-| Platform       | Link                                                  |
-| :------------- | :---------------------------------------------------- |
-| 📧 **Email**   | [ayusingh693@gmail.com](mailto:ayusingh693@gmail.com) |
-| 🐦 **Twitter** | Coming Soon                                           |
-| 💬 **Discord** | Coming Soon                                           |
-| 📺 **YouTube** | Coming Soon                                           |
+| Platform       | Ayush Singh                                           | Arya Aditya Yadav                                           |
+| :------------- | :---------------------------------------------------- | :---------------------------------------------------------- |
+| 📧 **Email**   | [ayusingh693@gmail.com](mailto:ayusingh693@gmail.com) | [aryaaditya7808@gmail.com](mailto:aryaaditya7808@gmail.com) |
+| 🐦 **Twitter** | Coming Soon                                           | Coming Soon                                                 |
+| 💬 **Discord** | Coming Soon                                           | Coming Soon                                                 |
+| 📺 **YouTube** | Coming Soon                                           | Coming Soon                                                 |
+                                           |
 
 ### Star History
 
