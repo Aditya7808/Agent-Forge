@@ -898,7 +898,7 @@ Special thanks to:
 **🔨 Forging the future of AI, one agent at a time — no finish line. 🔨**
 
 <br/>
-Made with ❤️ by [Ayush Singh](https://github.com/ayusingh-54) & [Arya Aditya Yadav](https://github.com/Aditya7808)
+Made with ❤️ by **Ayush Singh** & **Arya Aditya Yadav**
 
 <br/>
 
