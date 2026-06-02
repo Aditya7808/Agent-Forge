@@ -862,6 +862,14 @@ _AI Engineer & Open Source Enthusiast_
 </div>
 
 ---
+### **Arya Aditya Yadav**
+
+*AI Engineer | Data Scientist | Generative AI Developer*
+
+[![GitHub](https://img.shields.io/badge/GitHub-Aditya7808-181717?style=for-the-badge\&logo=github)](https://github.com/Aditya7808)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Arya%20Aditya%20Yadav-0A66C2?style=for-the-badge\&logo=linkedin)](https://www.linkedin.com/in/arya-aditya-yadav-01a6a1257/)
+[![Email](https://img.shields.io/badge/Email-aryaaditya7808%40gmail.com-EA4335?style=for-the-badge\&logo=gmail)](mailto:aryaaditya7808@gmail.com)
+
 
 ## 🙏 Acknowledgments
 
