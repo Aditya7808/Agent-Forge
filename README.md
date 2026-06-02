@@ -862,6 +862,10 @@ _AI Engineer & Open Source Enthusiast_
 </div>
 
 ---
+<div align="center">
+
+<img src="https://github.com/Aditya7808.png" width="150" style="border-radius: 50%;" alt="Arya Aditya Yadav"/>
+
 ### **Arya Aditya Yadav**
 
 *AI Engineer | Data Scientist | Generative AI Developer*
@@ -870,6 +874,7 @@ _AI Engineer & Open Source Enthusiast_
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Arya%20Aditya%20Yadav-0A66C2?style=for-the-badge\&logo=linkedin)](https://www.linkedin.com/in/arya-aditya-yadav-01a6a1257/)
 [![Email](https://img.shields.io/badge/Email-aryaaditya7808%40gmail.com-EA4335?style=for-the-badge\&logo=gmail)](mailto:aryaaditya7808@gmail.com)
 
+</div>
 
 ## 🙏 Acknowledgments
 
@@ -893,8 +898,7 @@ Special thanks to:
 **🔨 Forging the future of AI, one agent at a time — no finish line. 🔨**
 
 <br/>
-
-Made with ❤️ by [Ayush Singh](https://github.com/ayusingh-54)
+Made with ❤️ by [Ayush Singh](https://github.com/ayusingh-54) & [Arya Aditya Yadav](https://github.com/Aditya7808)
 
 <br/>
 
